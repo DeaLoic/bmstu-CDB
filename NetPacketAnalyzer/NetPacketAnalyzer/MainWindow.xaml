@@ -1,0 +1,15 @@
+﻿<Window x:Class="NetPacketAnalyzer.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:NetPacketAnalyzer"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBox x:Name="mainTextBoxLogin" HorizontalAlignment="Center" Height="28" Margin="0,136,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170"/>
+        <TextBox x:Name="mainTextBoxPass" HorizontalAlignment="Center" Height="28" Margin="0,189,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170"/>
+        <Button x:Name="LoginButton" Content="Login" HorizontalAlignment="Center" Height="24" Margin="0,233,0,0" VerticalAlignment="Top" Width="89" Click="LoginButton_Click"/>
+
+    </Grid>
+</Window>
