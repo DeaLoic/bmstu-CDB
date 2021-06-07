@@ -7,12 +7,12 @@ using AccessDB.Enums;
 
 namespace AccessDB.Repositories.IRepositories
 {
-    public interface IUserManagmentRepository : ICrudRepository<UserInfoDTO>
+    public interface IUserManagmentRepository
     {
         public void CreateUser(string login, string pass);
         public void DeleteUser(string login);
-        public IEnumerable<UserInfoDTO> FindUser(string login);
-        public IEnumerable<UserInfoDTO> FindAllUsers();
+        public IEnumerable<SystemUserDTO> FindUser(string login);
+        public IEnumerable<SystemUserDTO> FindAllUsers();
         public void GrantUserRole(string login, Role role);
         public void RevokeUserRole(string login, Role role);
 

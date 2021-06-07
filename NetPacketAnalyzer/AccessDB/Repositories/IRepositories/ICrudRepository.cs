@@ -4,9 +4,12 @@ using System.Text;
 
 namespace AccessDB.Repositories.IRepositories
 {
-    public interface ICrudRepository<Entity>
+    public interface ICrudRepository<DTO>
     {
-        void CreateEntityTableIfNotExists();
+        public void Add(DTO dto);
+        public void Delete(DTO dto);
+        public IEnumerable<DTO> Find(DTO dto);
+        public IEnumerable<DTO> FindAll();
     }
 
 }

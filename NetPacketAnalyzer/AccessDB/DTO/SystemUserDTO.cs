@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -8,19 +8,19 @@ using Qoollo.ClickHouse.Net.Repository;
 
 namespace AccessDB.DTO
 {
-    public class SourceDTO : IEnumerable
+    public class SystemUserDTO : IEnumerable
     {
         public string Login { get; set; }
         public string[] Roles { get; set; }
 
-        public SourceDTO(IDataReader reader)
+        public SystemUserDTO(IDataReader reader)
         {
             Login = reader.GetString(0);
             var objects = (object[])reader.GetValue(1);
             Roles = objects.Select(o => (string)o).ToArray();
         }
 
-        public SourceDTO() { }
+        public SystemUserDTO() { }
 
         public IEnumerator GetEnumerator()
         {
@@ -30,11 +30,11 @@ namespace AccessDB.DTO
 
     }
 
-    public class UserInfoDTOMapper : IEntityMapper<UserInfoDTO>
+    public class SystemUserDTOMapper : IEntityMapper<SystemUserDTO>
     {
-        public UserInfoDTO MapEntity(IDataReader reader)
+        public SystemUserDTO MapEntity(IDataReader reader)
         {
-            return new UserInfoDTO(reader);
+            return new SystemUserDTO(reader);
         }
     }
 }

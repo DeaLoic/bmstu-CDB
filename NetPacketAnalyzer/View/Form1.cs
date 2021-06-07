@@ -1,59 +1,53 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using ClickHouse.Client.ADO;
+using System.Windows.Forms;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using AccessDB.QueryBuilder;
 using Qoollo.ClickHouse.Net;
-using Qoollo.ClickHouse.Net.Repository;
-using AccessDB.QueryBuilder.IQueryBuilder;
-using AccessDB.QueryBuilder.ClickHouse;
 using AccessDB.Repositories.IRepositories;
 using AccessDB.Repositories.ClickHouse;
-using ClickHouse.Ado;
+using AccessDB.QueryBuilder.IQueryBuilder;
+using AccessDB.QueryBuilder.ClickHouse;
+using AccessDB;
+using Qoollo.ClickHouse.Net.Repository;
+using AccessDB.DTO;
 
-namespace NetPacketAnalyzer
+namespace View
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class LoginWindow : Window
+    public partial class LoginForm : Form
     {
         IConfiguration _config;
         IHost _host;
-        public LoginWindow()
+        public LoginForm()
         {
             _config = new ConfigurationBuilder()
-                    .AddJsonFile("config.json")
-                    .Build();
+                   .AddJsonFile("config.json")
+                   .Build();
             var builder = new HostBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddClickHouseRepository(_config.GetSection("ClickHouseConnectionPoolConfiguration"));
                     services.AddSingleton<IUserManagmentQueryBuilder, UserManagmentQueryBuilderClickHouse>();
                     services.AddSingleton<IUserManagmentRepository, UserManagmentRepositoryClickHouse>();
+                    services.AddSingleton<IEntityMapper<SystemUserDTO>, SystemUserDTOMapper>();
                 });
 
             _host = builder.Build();
             InitializeComponent();
         }
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
-        {   
-            if (mainTextBoxLogin.Text == "")
+        private void buttonLogin_Click(object sender, EventArgs e)
+        {
+            string login = textBoxLogin.Text;
+            string pass = textBoxPass.Text;
+            if (login == "")
             {
                 MessageBox.Show("Введите логин!");
                 return;
@@ -64,7 +58,7 @@ namespace NetPacketAnalyzer
                 var services = serviceScope.ServiceProvider;
 
                 var rep = services.GetRequiredService<IUserManagmentRepository>();
-                var resp = rep.FindUser(mainTextBoxLogin.Text);
+                var resp = rep.FindUser(login);
                 var users = resp.ToList();
                 if (users.Count() == 0)
                 {
@@ -80,15 +74,6 @@ namespace NetPacketAnalyzer
                     MessageBox.Show(users[0].Login + " " + roles);
                 }
             }
-        }
-    }
-    public static class DiExtensions
-    {
-        public static void AddRepositoryExtensions(IServiceCollection services)
-        {
-        }
-        public static void AddControllerExtensions(IServiceCollection services)
-        {
         }
     }
 }

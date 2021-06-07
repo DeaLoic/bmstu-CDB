@@ -1,4 +1,4 @@
-using AccessDB.Enums;
+using AccessDB.DTO;
 using AccessDB.QueryBuilder.IQueryBuilder;
 using System;
 using System.Collections.Generic;
@@ -13,26 +13,26 @@ namespace AccessDB.QueryBuilder.ClickHouse
             return @"   CREATE TABLE IF NOT EXISTS data_sources (
                         Ip String,
                         OwnerUUID UUID,
-                        Type Int8
+                        Type Int16
                         )
                         ENGINE=MergeTree()
                         ORDER BY (Ip);";
         }
-        public string AddSourceQuery(DataSourceDTO dataSource)
+        public string AddQuery(DataSourceDTO dataSource)
         {
             return @$"INSERT INTO data_sources (*) VALUES '{dataSource.Ip}', {dataSource.OwnerUUID}, {dataSource.Type};";
         }
 
-        public string DeleteSourceQuery(DataSourceDTO dataSource)
+        public string DeleteQuery(DataSourceDTO dataSource)
         {
             return @$"ALTER TABLE IF EXISTS data_sources DELETE WHERE Ip = '{dataSource.Ip}'";
         }
 
-        public string FindSourceQuery(DataSourceDTO dataSource)
+        public string FindQuery(DataSourceDTO dataSource)
         {
             return @$"SELECT * from data_sources WHERE Ip = '{dataSource.Ip}'";
         }
-        public string FindAllSourcesQuery()
+        public string FindAllQuery()
         {
             return @$"SELECT * from data_sources";
         }

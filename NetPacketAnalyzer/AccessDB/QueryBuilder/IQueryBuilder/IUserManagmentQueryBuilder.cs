@@ -5,7 +5,7 @@ using AccessDB.Enums;
 
 namespace AccessDB.QueryBuilder.IQueryBuilder
 {
-    public interface IUserManagmentQueryBuilder : ICrudQueryBuilder
+    public interface IUserManagmentQueryBuilder
     {
         public string AddUserQuery(string login, string pass);
         public string DropUserQuery(string login);

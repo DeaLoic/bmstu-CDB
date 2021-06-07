@@ -8,20 +8,6 @@ namespace AccessDB.QueryBuilder.ClickHouse
 {
     public class UserManagmentQueryBuilderClickHouse : IUserManagmentQueryBuilder
     {
-        public string CreateTableQuery()
-        {
-            /*
-            return @"   CREATE TABLE IF NOT EXISTS user_info (
-                        Id UUID,
-                        Login String,
-                        Hash String,
-                        Permission Int8
-                        )
-                        ENGINE=MergeTree()
-                        ORDER BY (Login);";
-                        */
-            return ";";
-        }
         public string AddUserQuery(string login, string pass)
         {
             return @$"CREATE user IF NOT EXISTS {login} WITH sha256_password BY '{pass}';";

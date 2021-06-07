@@ -1,4 +1,4 @@
-using AccessDB.Enums;
+using AccessDB.DTO;
 using AccessDB.QueryBuilder.IQueryBuilder;
 using System;
 using System.Collections.Generic;
@@ -18,19 +18,19 @@ namespace AccessDB.QueryBuilder.ClickHouse
                         ENGINE=MergeTree()
                         ORDER BY (Id);";
         }
-        public string AddUserQuery(UserInfoDTO users)
+        public string AddQuery(UserInfoDTO users)
         {
             return @$"INSERT INTO user_info (*) VALUES {users.UUID}, '{users.Name}', '{users.Post}';";
         }
-        public string DropUserQuery(UserInfoDTO users)
+        public string DeleteQuery(UserInfoDTO users)
         {
             return @$"ALTER TABLE IF EXISTS user_info DELETE WHERE ID = {users.UUID}";
         }
-        public string FindUserByUUIDQuery(UserInfoDTO users)
+        public string FindQuery(UserInfoDTO users)
         {
             return @$"SELECT * FROM user_info WHERE ID = {users.UUID}";
         }
-        public string FindAllUsersQuery()
+        public string FindAllQuery()
         {
             return @$"SELECT * FROM user_info";
         }

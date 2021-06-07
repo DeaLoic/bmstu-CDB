@@ -18,18 +18,14 @@ namespace AccessDB.Repositories.ClickHouse
     {
         private IUserManagmentQueryBuilder _qbuilder;
         private IClickHouseRepository _clickHouseRepository;
-        private ILogger _logger;
-        private UserInfoDTOMapper _mapper = new UserInfoDTOMapper();
-        public UserManagmentRepositoryClickHouse(IUserManagmentQueryBuilder qbuilder, IClickHouseRepository clickHouseRepository, ILogger<UserInfoDTO> logger)
+        private ILogger<UserManagmentRepositoryClickHouse> _logger;
+        private IEntityMapper<SystemUserDTO> _mapper;
+        public UserManagmentRepositoryClickHouse(IUserManagmentQueryBuilder qbuilder, IClickHouseRepository clickHouseRepository, ILogger<UserManagmentRepositoryClickHouse> logger, IEntityMapper<SystemUserDTO> mapper)
         {
             _qbuilder = qbuilder;
             _clickHouseRepository = clickHouseRepository;
-        }
-
-        public void CreateEntityTableIfNotExists()
-        {
-            string createTableQuery = _qbuilder.CreateTableQuery();
-            _clickHouseRepository.ExecuteNonQuery(createTableQuery);
+            _logger = logger;
+            _mapper = mapper;
         }
 
         public void CreateUser(string login, string pass)
@@ -44,13 +40,13 @@ namespace AccessDB.Repositories.ClickHouse
             _clickHouseRepository.ExecuteNonQuery(deleteUserQuery);
         }
 
-        public IEnumerable<UserInfoDTO> FindUser(string login)
+        public IEnumerable<SystemUserDTO> FindUser(string login)
         {
             string findUserQuery = _qbuilder.FindUserByLoginQuery(login);
             var user = _clickHouseRepository.ExecuteQueryMapping(findUserQuery, _mapper);
             return user;
         }
-        public IEnumerable<UserInfoDTO> FindAllUsers()
+        public IEnumerable<SystemUserDTO> FindAllUsers()
         {
             string findAllUsersQuery = _qbuilder.FindAllUsersQuery();
             var users = _clickHouseRepository.ExecuteQueryMapping(findAllUsersQuery, _mapper);

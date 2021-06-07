@@ -7,10 +7,6 @@ namespace AccessDB.QueryBuilder.IQueryBuilder
 {
     public interface IDifficultQueryBuilder
     {
-        public string FindSourcesByMarkThatToDestTypeMoreThanCount(Mark mark, DestType type, int count);
-        public string DropTypeQuery(string login);
-
-        public string FindTypeQuery(string login);
-        public string FindAllTypesQuery();
+        public string FindSourcesByPostThatToDestTypeMoreThanCount(string post, DestType type, int count);
     }
 }

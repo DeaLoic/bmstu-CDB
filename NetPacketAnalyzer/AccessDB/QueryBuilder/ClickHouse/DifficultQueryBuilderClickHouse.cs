@@ -8,7 +8,7 @@ namespace AccessDB.QueryBuilder.ClickHouse
 {
     public class DifficultQueryBuilderClickHouse : IDifficultQueryBuilder
     {
-        public string FindSourcesByMarkThatToDestTypeMoreThanCount(Mark mark, DestType type, int count)
+        public string FindSourcesByPostThatToDestTypeMoreThanCount(string post, DestType type, int count)
         {
             return ";";
         }

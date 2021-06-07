@@ -10,24 +10,25 @@ namespace AccessDB.DTO
 {
     public class UserInfoDTO : IEnumerable
     {
-        public string Login { get; set; }
-        public string[] Roles { get; set; }
+        public string UUID { get; set; }
+        public string Name { get; set; }
+        public string Post { get; set; }
 
         public UserInfoDTO(IDataReader reader)
         {
-            Login = reader.GetString(0);
-            var objects = (object[])reader.GetValue(1);
-            Roles = objects.Select(o => (string)o).ToArray();
+            UUID = reader.GetString(0);
+            Name = reader.GetString(1);
+            Post = reader.GetString(2);
         }
 
         public UserInfoDTO() { }
 
         public IEnumerator GetEnumerator()
         {
-            yield return Login;
-            yield return Roles;
+            yield return UUID;
+            yield return Name;
+            yield return Post;
         }
-
     }
 
     public class UserInfoDTOMapper : IEntityMapper<UserInfoDTO>
