@@ -12,13 +12,13 @@ namespace AccessDB.DTO
     {
         public string Ip { get; set; }
         public string OwnerUUID { get; set; }
-        public string Type { get; set; }
+        public int Type { get; set; }
 
         public DataSourceDTO(IDataReader reader)
         {
             Ip = reader.GetString(0);
             OwnerUUID = reader.GetString(1);
-            Type = reader.GetString(2);
+            Type = reader.GetInt16(2);
         }
 
         public DataSourceDTO() { }

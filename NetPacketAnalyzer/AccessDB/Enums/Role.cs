@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccessDB.DTO;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -30,7 +31,6 @@ namespace AccessDB.Enums
             }
             return roleString;
         }
-
         public static Role RoleStringToEnum(string role)
         {
             var roleEnum = Role.Error;
@@ -48,6 +48,25 @@ namespace AccessDB.Enums
             }
             return roleEnum;
         }
+        public static Role RoleDTOToEnum(RoleDTO roleDTO)
+        {
+            var roleEnum = Role.Error;
+            string role = roleDTO.RoleName;
+            if (role.Equals("guest"))
+            {
+                roleEnum = Role.Guest;
+            }
+            else if (role.Equals("analyst"))
+            {
+                roleEnum = Role.Analyst;
+            }
+            else if (role.Equals("admin"))
+            {
+                roleEnum = Role.Admin;
+            }
+            return roleEnum;
+        }
+
     }
 
 }

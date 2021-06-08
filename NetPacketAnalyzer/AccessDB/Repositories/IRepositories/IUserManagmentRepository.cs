@@ -15,6 +15,7 @@ namespace AccessDB.Repositories.IRepositories
         public IEnumerable<SystemUserDTO> FindAllUsers();
         public void GrantUserRole(string login, Role role);
         public void RevokeUserRole(string login, Role role);
+        public IEnumerable<RoleDTO> GetCurrentRoles();
 
     }
 }

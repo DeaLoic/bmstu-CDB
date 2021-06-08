@@ -15,5 +15,6 @@ namespace AccessDB.QueryBuilder.IQueryBuilder
 
         public string RevokeRoleUserQuery(string login, Role role);
         public string GrantRoleUserQuery(string login, Role role);
+        public string CurrentRolesQuery();
     }
 }

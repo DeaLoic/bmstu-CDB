@@ -6,8 +6,8 @@ using AccessDB.Enums;
 
 namespace AccessDB.Repositories.IRepositories
 {
-    interface IDifficultRepository
+    public interface IDifficultRepository
     {
-        public IEnumerable<DifficultSourcesByPostThatToDestTypeMoreThanCountDTO> FindSourcesByPostThatToDestTypeMoreThanCount(string post, DestType type, int count);
+        public IEnumerable<DifficultSourcesByPostThatToDestTypeMoreThanCountDTO> FindSourcesByPostThatToDestTypeMoreThanCount(string post, int type, int count);
     }
 }

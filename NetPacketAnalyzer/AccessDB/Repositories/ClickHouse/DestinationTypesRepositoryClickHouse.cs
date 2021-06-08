@@ -9,9 +9,9 @@ using Qoollo.ClickHouse.Net.Repository;
 
 namespace AccessDB.Repositories.ClickHouse
 {
-    class DestinationTypesRepositoryClickHouse : CrudPlusRepositoryClickHouse<DestinationTypeDTO>, IDestinationTypesRepository
+    public class DestinationTypesRepositoryClickHouse : CrudPlusRepositoryClickHouse<DestinationTypeDTO>, IDestinationTypesRepository
     {
-        public DestinationTypesRepositoryClickHouse(ICrudQueryBuilder<DestinationTypeDTO> qbuilder, IClickHouseRepository clickHouseRepository, ILogger<DestinationTypesRepositoryClickHouse> logger, IEntityMapper<DestinationTypeDTO> mapper)
+        public DestinationTypesRepositoryClickHouse(IDestinationTypesQueryBuilder qbuilder, IClickHouseRepository clickHouseRepository, ILogger<DestinationTypesRepositoryClickHouse> logger, IEntityMapper<DestinationTypeDTO> mapper)
             : base(qbuilder, clickHouseRepository, logger, mapper)
         {
         }

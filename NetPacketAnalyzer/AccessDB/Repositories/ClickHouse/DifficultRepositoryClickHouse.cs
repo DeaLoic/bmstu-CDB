@@ -23,7 +23,7 @@ namespace AccessDB.Repositories.ClickHouse
             _logger = logger;
             _mapper = mapper;
         }
-        public IEnumerable<DifficultSourcesByPostThatToDestTypeMoreThanCountDTO> FindSourcesByPostThatToDestTypeMoreThanCount(string post, DestType type, int count)
+        public IEnumerable<DifficultSourcesByPostThatToDestTypeMoreThanCountDTO> FindSourcesByPostThatToDestTypeMoreThanCount(string post, int type, int count)
         {
             string queryString = _qbuilder.FindSourcesByPostThatToDestTypeMoreThanCount(post, type, count);
             var entities = _clickHouseRepository.ExecuteQueryMapping(queryString, _mapper);

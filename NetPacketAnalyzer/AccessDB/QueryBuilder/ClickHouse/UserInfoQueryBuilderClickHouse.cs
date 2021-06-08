@@ -13,7 +13,7 @@ namespace AccessDB.QueryBuilder.ClickHouse
             return @"   CREATE TABLE IF NOT EXISTS user_info (
                         Id UUID,
                         Name String,
-                        Post String,
+                        Post String
                         )
                         ENGINE=MergeTree()
                         ORDER BY (Id);";

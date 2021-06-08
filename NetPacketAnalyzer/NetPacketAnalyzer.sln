@@ -7,8 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccessDB", "AccessDB\Access
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "View", "View\View.csproj", "{47B12CDB-DD38-4A29-8E2B-87B3C317A1C1}"
 	ProjectSection(ProjectDependencies) = postProject
+		{CDBBE927-CFFC-48AC-81D9-BC6D5A91FF4D} = {CDBBE927-CFFC-48AC-81D9-BC6D5A91FF4D}
 		{9AC28253-6F19-41A4-B83E-113343E7455A} = {9AC28253-6F19-41A4-B83E-113343E7455A}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelLogic", "ModelLogic\ModelLogic.csproj", "{CDBBE927-CFFC-48AC-81D9-BC6D5A91FF4D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -24,6 +27,10 @@ Global
 		{47B12CDB-DD38-4A29-8E2B-87B3C317A1C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47B12CDB-DD38-4A29-8E2B-87B3C317A1C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47B12CDB-DD38-4A29-8E2B-87B3C317A1C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDBBE927-CFFC-48AC-81D9-BC6D5A91FF4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDBBE927-CFFC-48AC-81D9-BC6D5A91FF4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDBBE927-CFFC-48AC-81D9-BC6D5A91FF4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDBBE927-CFFC-48AC-81D9-BC6D5A91FF4D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

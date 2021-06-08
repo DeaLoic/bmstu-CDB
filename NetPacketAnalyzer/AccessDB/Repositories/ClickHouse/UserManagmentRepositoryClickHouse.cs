@@ -64,5 +64,11 @@ namespace AccessDB.Repositories.ClickHouse
             string revokeRoleUserQuery = _qbuilder.RevokeRoleUserQuery(login, role);
             _clickHouseRepository.ExecuteNonQuery(revokeRoleUserQuery);
         }
+
+        public IEnumerable<RoleDTO> GetCurrentRoles()
+        {
+            string currentRolesQuery = _qbuilder.CurrentRolesQuery();
+            return _clickHouseRepository.ExecuteQueryMapping(currentRolesQuery, new RoleDTOMapper());
+        }
     }
 }

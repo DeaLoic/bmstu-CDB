@@ -10,7 +10,7 @@ namespace AccessDB.QueryBuilder.ClickHouse
     {
         public string AddUserQuery(string login, string pass)
         {
-            return @$"CREATE user IF NOT EXISTS {login} WITH sha256_password BY '{pass}';";
+            return @$"CREATE user IF NOT EXISTS {login} IDENTIFIED WITH sha256_password BY '{pass}';";
         }
         public string DropUserQuery(string login)
         {
@@ -32,6 +32,10 @@ namespace AccessDB.QueryBuilder.ClickHouse
         public string GrantRoleUserQuery(string login, Role role)
         {
             return @$"grant {RoleExtension.RoleEnumToString(role)} to {login};";
+        }
+        public string CurrentRolesQuery()
+        {
+            return @$"SHOW CURRENT ROLES;";
         }
     }
 }
