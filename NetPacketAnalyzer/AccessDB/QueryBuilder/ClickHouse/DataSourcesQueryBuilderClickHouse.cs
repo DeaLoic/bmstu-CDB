@@ -8,6 +8,7 @@ namespace AccessDB.QueryBuilder.ClickHouse
 {
     public class DataSourcesQueryBuilderClickHouse : IDataSourcesQueryBuilder
     {
+
         public string CreateTableQuery()
         {
             return @"   CREATE TABLE IF NOT EXISTS data_sources (
@@ -20,7 +21,7 @@ namespace AccessDB.QueryBuilder.ClickHouse
         }
         public string AddQuery(DataSourceDTO dataSource)
         {
-            return @$"INSERT INTO data_sources (*) VALUES '{dataSource.Ip}', {dataSource.OwnerUUID}, {dataSource.Type};";
+            return @$"INSERT INTO data_sources SELECT '{dataSource.Ip}', {dataSource.OwnerUUID}, {dataSource.Type};";
         }
 
         public string DeleteQuery(DataSourceDTO dataSource)

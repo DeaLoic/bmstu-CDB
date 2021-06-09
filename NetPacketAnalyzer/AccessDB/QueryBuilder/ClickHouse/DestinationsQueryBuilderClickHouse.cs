@@ -20,7 +20,7 @@ namespace AccessDB.QueryBuilder.ClickHouse
         }
         public string AddQuery(DestinationDTO dataDestination)
         {
-            return @$"INSERT INTO data_destinations (*) VALUES '{dataDestination.Ip}', {dataDestination.Type};";
+            return @$"INSERT INTO data_destinations SELECT '{dataDestination.Ip}', {dataDestination.Type};";
         }
 
         public string DeleteQuery(DestinationDTO dataDestination)

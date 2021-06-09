@@ -20,7 +20,7 @@ namespace AccessDB.QueryBuilder.ClickHouse
         }
         public string AddQuery(SourceTypeDTO dataType)
         {
-            return @$"INSERT INTO data_source_types (*) VALUES {dataType.Type}, '{dataType.CommentString}';";
+            return @$"INSERT INTO data_source_types SELECT {dataType.Type}, '{dataType.CommentString}';";
         }
 
         public string DeleteQuery(SourceTypeDTO dataType)
