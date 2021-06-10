@@ -62,12 +62,20 @@ namespace View
             this.buttonSources = new System.Windows.Forms.Button();
             this.buttonOwners = new System.Windows.Forms.Button();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.groupBoxAnalyst = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.textBoxMinutes2 = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
+            this.buttonr = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.buttonLogout = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.mainDataGrid)).BeginInit();
             this.groupBoxAdmin.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPage2.SuspendLayout();
             this.groupBoxGuest.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.groupBoxAnalyst.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -253,7 +261,7 @@ namespace View
             // labelCurrentRole
             // 
             this.labelCurrentRole.AutoSize = true;
-            this.labelCurrentRole.Location = new System.Drawing.Point(686, 426);
+            this.labelCurrentRole.Location = new System.Drawing.Point(686, 425);
             this.labelCurrentRole.Name = "labelCurrentRole";
             this.labelCurrentRole.Size = new System.Drawing.Size(0, 15);
             this.labelCurrentRole.TabIndex = 3;
@@ -350,6 +358,7 @@ namespace View
             this.buttonTrafficMinutes.TabIndex = 4;
             this.buttonTrafficMinutes.Text = "Отобразить трафик за последние n минут";
             this.buttonTrafficMinutes.UseVisualStyleBackColor = true;
+            this.buttonTrafficMinutes.Click += new System.EventHandler(this.buttonTrafficMinutes_Click);
             // 
             // buttonTypesSource
             // 
@@ -393,12 +402,62 @@ namespace View
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.groupBoxAnalyst);
             this.tabPage3.Location = new System.Drawing.Point(4, 24);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Size = new System.Drawing.Size(194, 350);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Аналитика";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxAnalyst
+            // 
+            this.groupBoxAnalyst.Controls.Add(this.label7);
+            this.groupBoxAnalyst.Controls.Add(this.textBoxMinutes2);
+            this.groupBoxAnalyst.Controls.Add(this.button2);
+            this.groupBoxAnalyst.Controls.Add(this.buttonr);
+            this.groupBoxAnalyst.Enabled = false;
+            this.groupBoxAnalyst.Location = new System.Drawing.Point(8, 3);
+            this.groupBoxAnalyst.Name = "groupBoxAnalyst";
+            this.groupBoxAnalyst.Size = new System.Drawing.Size(179, 344);
+            this.groupBoxAnalyst.TabIndex = 3;
+            this.groupBoxAnalyst.TabStop = false;
+            this.groupBoxAnalyst.Text = "Панель управления";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(6, 30);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 15);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Минуты";
+            // 
+            // textBoxMinutes2
+            // 
+            this.textBoxMinutes2.Location = new System.Drawing.Point(71, 22);
+            this.textBoxMinutes2.Name = "textBoxMinutes2";
+            this.textBoxMinutes2.Size = new System.Drawing.Size(93, 23);
+            this.textBoxMinutes2.TabIndex = 12;
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(6, 295);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(158, 40);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Отобразить трафик за последние n минут";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // buttonr
+            // 
+            this.buttonr.Location = new System.Drawing.Point(4, 65);
+            this.buttonr.Name = "buttonr";
+            this.buttonr.Size = new System.Drawing.Size(164, 40);
+            this.buttonr.TabIndex = 0;
+            this.buttonr.Text = "Отобразить сумму трафика";
+            this.buttonr.UseVisualStyleBackColor = true;
+            this.buttonr.Click += new System.EventHandler(this.buttonr_Click);
             // 
             // tabPage1
             // 
@@ -411,11 +470,23 @@ namespace View
             this.tabPage1.Text = "Админ";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // buttonLogout
+            // 
+            this.buttonLogout.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.buttonLogout.Location = new System.Drawing.Point(807, 403);
+            this.buttonLogout.Name = "buttonLogout";
+            this.buttonLogout.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.buttonLogout.Size = new System.Drawing.Size(19, 37);
+            this.buttonLogout.TabIndex = 7;
+            this.buttonLogout.UseVisualStyleBackColor = false;
+            this.buttonLogout.Click += new System.EventHandler(this.logout_Click);
+            // 
             // LandingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(831, 450);
+            this.Controls.Add(this.buttonLogout);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
@@ -432,6 +503,9 @@ namespace View
             this.tabPage2.ResumeLayout(false);
             this.groupBoxGuest.ResumeLayout(false);
             this.groupBoxGuest.PerformLayout();
+            this.tabPage3.ResumeLayout(false);
+            this.groupBoxAnalyst.ResumeLayout(false);
+            this.groupBoxAnalyst.PerformLayout();
             this.tabPage1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -475,5 +549,11 @@ namespace View
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.Button buttonTypeDest;
+        private System.Windows.Forms.Button buttonLogout;
+        private System.Windows.Forms.GroupBox groupBoxAnalyst;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox textBoxMinutes2;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button buttonr;
     }
 }

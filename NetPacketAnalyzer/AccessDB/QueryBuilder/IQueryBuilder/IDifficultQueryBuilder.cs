@@ -8,5 +8,6 @@ namespace AccessDB.QueryBuilder.IQueryBuilder
     public interface IDifficultQueryBuilder
     {
         public string FindSourcesByPostThatToDestTypeMoreThanCount(string post, int type, int count);
+        public string GetTraficCountPerSource(int minutes);
     }
 }

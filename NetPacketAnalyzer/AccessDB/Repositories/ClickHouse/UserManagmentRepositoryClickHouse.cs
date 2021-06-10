@@ -6,8 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Qoollo.ClickHouse.Net.Repository;
-using AccessDB.Tables;
-using AccessDB.DTO;
 using ClickHouse.Ado;
 using System.Linq;
 using AccessDB.Enums;
@@ -16,10 +14,10 @@ namespace AccessDB.Repositories.ClickHouse
 {
     public class UserManagmentRepositoryClickHouse : IUserManagmentRepository
     {
-        private IUserManagmentQueryBuilder _qbuilder;
-        private IClickHouseRepository _clickHouseRepository;
-        private ILogger<UserManagmentRepositoryClickHouse> _logger;
-        private IEntityMapper<SystemUserDTO> _mapper;
+        protected IUserManagmentQueryBuilder _qbuilder;
+        protected IClickHouseRepository _clickHouseRepository;
+        protected ILogger<UserManagmentRepositoryClickHouse> _logger;
+        protected IEntityMapper<SystemUserDTO> _mapper;
         public UserManagmentRepositoryClickHouse(IUserManagmentQueryBuilder qbuilder, IClickHouseRepository clickHouseRepository, ILogger<UserManagmentRepositoryClickHouse> logger, IEntityMapper<SystemUserDTO> mapper)
         {
             _qbuilder = qbuilder;

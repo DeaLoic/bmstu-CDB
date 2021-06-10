@@ -23,29 +23,6 @@ SETTINGS kafka_broker_list = '192.168.1.53:9092',
  kafka_format = 'Protobuf',
  kafka_schema = './flow.proto:FlowMessage';
  
-CREATE TABLE  IF NOT EXISTS flows_5m
-(
-    `Date` Date,
-    Timeslot DateTime,
-    SrcAS UInt32,
-    DstAS UInt32,
-    `ETypeMap.EType` Array(UInt32),
-    `ETypeMap.Bytes` Array(UInt64),
-    `ETypeMap.Packets` Array(UInt64),
-    `ETypeMap.Count` Array(UInt64),
-    Bytes UInt64,
-    Packets UInt64,
-    `Count` UInt64
-)
-ENGINE = SummingMergeTree
-PARTITION BY Date
-ORDER BY (Date,
- Timeslot,
- SrcAS,
- DstAS,
- `ETypeMap.EType`)
-SETTINGS index_granularity = 8192;
-
 CREATE TABLE IF NOT EXISTS flows_raw
 (
     Date Date,
@@ -69,42 +46,6 @@ ENGINE = MergeTree
 PARTITION BY Date
 ORDER BY TimeReceived
 SETTINGS index_granularity = 8192;
-
-
-CREATE MATERIALIZED VIEW IF NOT EXISTS default.flows_5m_view TO default.flows_5m
-(
-    `Date` Date,
-    `Timeslot` DateTime('Europe/Moscow'),
-    `SrcAS` UInt32,
-    `DstAS` UInt32,
-    `ETypeMap.EType` Array(UInt32),
-    `ETypeMap.Bytes` Array(UInt64),
-    `ETypeMap.Packets` Array(UInt64),
-    `ETypeMap.Count` Array(UInt64),
-    `Bytes` UInt64,
-    `Packets` UInt64,
-    `Count` UInt64
-) AS
-SELECT
-    Date,
-    toStartOfFiveMinute(TimeReceived) AS Timeslot,
-    SrcAS,
-    DstAS,
-    [EType] AS `ETypeMap.EType`,
-    [Bytes] AS `ETypeMap.Bytes`,
-    [Packets] AS `ETypeMap.Packets`,
-    [Count] AS `ETypeMap.Count`,
-    sum(Bytes) AS Bytes,
-    sum(Packets) AS Packets,
-    count() AS Count
-FROM default.flows_raw
-GROUP BY
-    Date,
-    Timeslot,
-    SrcAS,
-    DstAS,
-    `ETypeMap.EType`;
-
    
 CREATE MATERIALIZED VIEW IF NOT EXISTS default.flows_raw_view TO default.flows_raw
 (

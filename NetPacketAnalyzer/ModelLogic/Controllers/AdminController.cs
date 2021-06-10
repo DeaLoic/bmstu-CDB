@@ -17,8 +17,8 @@ namespace ModelLogic.Controllers
 
         public AdminController(IDataSourcesRepository dataSourcesRepository, IDataSourceTypesRepository dataSourceTypesRepository,
             IDestinationsRepository destinationsRepository, IDestinationTypesRepository destinationTypesRepository,
-            IUserInfoRepository userInfoRepository, IUserManagmentRepository userManagmentRepository, ILogger<AdminController> logger) :
-            base(dataSourcesRepository, dataSourceTypesRepository, destinationsRepository, destinationTypesRepository, userInfoRepository, logger)
+            IUserInfoRepository userInfoRepository, IUserManagmentRepository userManagmentRepository, IFlowsRawRepository flowsRawRepository, ILogger<AdminController> logger) :
+            base(dataSourcesRepository, dataSourceTypesRepository, destinationsRepository, destinationTypesRepository, userInfoRepository, flowsRawRepository, logger)
         {
             _userManagmentRepository = userManagmentRepository;
         }

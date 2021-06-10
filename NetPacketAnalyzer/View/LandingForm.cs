@@ -10,6 +10,8 @@ using ModelLogic.Models;
 using Microsoft.Extensions.Logging;
 using ModelLogic.Controllers;
 using System.Linq;
+using AccessDB.DTO;
+using ModelLogic.Utilities;
 
 namespace View
 {
@@ -42,23 +44,45 @@ namespace View
             labelCurrentLogin.Text = _currentLogin.Username;
             foreach (var role in _currentLogin.Roles)
             {
-                if (role == Role.Analyst)
+                if (role == Role.Guest)
+                {
+                    labelCurrentRole.Text += "Гость";
+                }
+                else if (role == Role.Analyst)
                 {
                     labelCurrentRole.Text += " Аналитик";
                 }
-                if (role == Role.Admin && groupBoxAdmin.Enabled != true)
+                else if (role == Role.Admin)
                 {
-                    groupBoxAdmin.Enabled = true;
                     labelCurrentRole.Text += " Админ";
                 }
-                if (role == Role.Guest && groupBoxGuest.Enabled != true)
+
+                if (role == Role.Admin)
+                {
+                    groupBoxAdmin.Enabled = true;
+                    groupBoxAnalyst.Enabled = true;
+                    groupBoxGuest.Enabled = true;
+                }
+                else if (role == Role.Analyst)
+                {
+                    groupBoxAnalyst.Enabled = true;
+                    groupBoxGuest.Enabled = true;
+                }
+                else if (role == Role.Guest)
                 {
                     groupBoxGuest.Enabled = true;
-                    labelCurrentRole.Text += " Гость";
                 }
             }
         }
 
+        private void ChangeTableSumTypes()
+        {
+            mainDataGrid.Rows.Clear();
+            mainDataGrid.Columns.Clear();
+            mainDataGrid.Columns.Add("Ip", "IP");
+            mainDataGrid.Columns.Add("Roles", "Сумма трафика");
+        }
+        
         private void ChangeTableUsers()
         {
             mainDataGrid.Rows.Clear();
@@ -105,6 +129,31 @@ namespace View
             mainDataGrid.Columns.Clear();
             mainDataGrid.Columns.Add("Type", "Тип");
             mainDataGrid.Columns.Add("CommentString", "Комментарий");
+        }
+
+        private void ChangeTableFlowDTOTypes()
+        {
+            mainDataGrid.Rows.Clear();
+            mainDataGrid.Columns.Clear();
+            mainDataGrid.Columns.Add("TimeReceived", "Время получения данных");
+            mainDataGrid.Columns.Add("TimeFlowStart", "Время начала потока");
+            mainDataGrid.Columns.Add("SequenceNum", "Номер в последовательности");
+            // Кол-во "схлопнутых пакетов"
+            mainDataGrid.Columns.Add("SamplingRate", "Sampling Rate");
+            // Sampler info
+            mainDataGrid.Columns.Add("SamplerAddress", "SamplerAddress");
+            mainDataGrid.Columns.Add("SrcAddr", "Адрес источника");
+            mainDataGrid.Columns.Add("DstAddr", "Адрес назначения");
+            mainDataGrid.Columns.Add("SrcAS", "Автономная система (AS). Источник");
+            mainDataGrid.Columns.Add("DstAS", "Автономная система (AS). Назначение");
+            mainDataGrid.Columns.Add("EType", "Etype");
+            mainDataGrid.Columns.Add("Proto", "Proto");
+            mainDataGrid.Columns.Add("SrcPort", "Порт источника");
+            mainDataGrid.Columns.Add("DstPort", "Порт назначения");
+
+            // Size of the sampled packet
+            mainDataGrid.Columns.Add("Bytes", "Размер в байтах");
+            mainDataGrid.Columns.Add("Packets", "Кол-во пакетов");
         }
 
         #region Admin Functions
@@ -339,6 +388,102 @@ namespace View
                 foreach (var type in types)
                 {
                     mainDataGrid.Rows.Add(type.Type, type.CommentString);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Типы узлов назначения не найдены");
+            }
+        }
+
+        private void buttonTrafficMinutes_Click(object sender, EventArgs e)
+        {
+            int minutes = 0;
+            try
+            {
+                minutes = Int32.Parse(textBoxMinutes.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Введите корректное целое число", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            ChangeTableFlowDTOTypes();
+            List<Flow> flows = null;
+            try
+            {
+                flows = _userController.FindFlowByMinutes(minutes).ToList();
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (flows != null)
+            {
+                foreach (var flow in flows)
+                {
+                    mainDataGrid.Rows.Add(  flow.TimeReceived.ToString(),
+                                            flow.TimeFlowStart.ToString(),
+                                            flow.SequenceNum.ToString(),
+                                            flow.SamplingRate.ToString(),
+                                            flow.SamplerAddress.ToString(),
+                                            flow.SrcAddr.ToString(),
+                                            flow.DstAddr.ToString(),
+                                            flow.SrcAS.ToString(),
+                                            flow.DstAS.ToString(),
+                                            flow.EType.ToString(),
+                                            flow.Proto.ToString(),
+                                            flow.SrcPort.ToString(),
+                                            flow.DstPort.ToString(),
+                                            flow.Bytes.ToString(),
+                                            flow.Packets.ToString());
+                }
+            }
+            else
+            {
+                MessageBox.Show("Потоки не найдены");
+            }
+        }
+
+        private void logout_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            this.Dispose();
+            LoginForm form = new LoginForm();
+            form.Show();
+            this.Close();
+        }
+
+        private void buttonr_Click(object sender, EventArgs e)
+        {
+            int minutes = 0;
+            try
+            {
+                minutes = Int32.Parse(textBoxMinutes2.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Введите корректное целое число", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            ChangeTableSumTypes();
+            List<SumDTO> sum = null;
+            try
+            {
+                sum = _analysts.FindSum(minutes);
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (sum != null)
+            {
+                foreach (var sumv in sum)
+                {
+                    mainDataGrid.Rows.Add(IpTransformer.MaskToString(Encoding.ASCII.GetBytes(sumv.SrcAddr)), sumv.Sum);
                 }
             }
             else

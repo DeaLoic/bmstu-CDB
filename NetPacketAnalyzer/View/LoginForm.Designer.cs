@@ -67,6 +67,7 @@
             this.Controls.Add(this.textBoxLogin);
             this.Name = "LoginForm";
             this.Text = "Логин";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.LoginForm_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

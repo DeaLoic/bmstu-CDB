@@ -10,7 +10,13 @@ namespace AccessDB.QueryBuilder.ClickHouse
     {
         public string FindSourcesByPostThatToDestTypeMoreThanCount(string post, int type, int count)
         {
-            return ";";
+            return "Select SrcAddr from flows_raw where";
+        }
+
+        public string GetTraficCountPerSource(int minutes)
+        {
+            return @$"WITH subtractMinutes(now(), {minutes}) as startTime
+                       SELECT SrcAddr, sum(Bytes) FROM flows_raw where TimeFlowStart >= startTime GROUP By SrcAddr;";
         }
     }
 }

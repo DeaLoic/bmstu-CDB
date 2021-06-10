@@ -11,8 +11,8 @@ namespace ModelLogic.Controllers
 
         public GuestController(IDataSourcesRepository dataSourcesRepository, IDataSourceTypesRepository dataSourceTypesRepository,
                 IDestinationsRepository destinationsRepository, IDestinationTypesRepository destinationTypesRepository,
-                IUserInfoRepository userInfoRepository, ILogger<GuestController> logger) :
-                base(dataSourcesRepository, dataSourceTypesRepository, destinationsRepository, destinationTypesRepository, userInfoRepository, logger)
+                IUserInfoRepository userInfoRepository, IFlowsRawRepository flowsRawRepository, ILogger<GuestController> logger) :
+                base(dataSourcesRepository, dataSourceTypesRepository, destinationsRepository, destinationTypesRepository, userInfoRepository, flowsRawRepository, logger)
         {
         }
     }

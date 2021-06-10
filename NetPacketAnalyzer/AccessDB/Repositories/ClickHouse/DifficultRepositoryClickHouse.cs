@@ -29,5 +29,12 @@ namespace AccessDB.Repositories.ClickHouse
             var entities = _clickHouseRepository.ExecuteQueryMapping(queryString, _mapper);
             return entities;
         }
+
+        public IEnumerable<SumDTO> GetTraficCountPerSource(int minutes)
+        {
+            string queryString = _qbuilder.GetTraficCountPerSource(minutes);
+            var entities = _clickHouseRepository.ExecuteQueryMapping(queryString, new SumDTOMapper());
+            return entities;
+        }
     }
 }

@@ -182,7 +182,6 @@ namespace View
             }
             public static void AddRepositoriesClickHouseDI(IServiceCollection services)
             {
-                services.AddSingleton<ICrudPlusRepository<DataSourceDTO>, CrudPlusRepositoryClickHouse<DataSourceDTO>>();
                 services.AddSingleton<IDataSourcesRepository, DataSourcesRepositoryClickHouse>();
                 services.AddSingleton<IDataSourceTypesRepository, DataSourceTypesRepositoryClickHouse>();
                 services.AddSingleton<IDestinationsRepository, DestinationsRepositoryClickHouse>();
@@ -190,6 +189,7 @@ namespace View
                 services.AddSingleton<IDifficultRepository, DifficultRepositoryClickHouse>();
                 services.AddSingleton<IUserInfoRepository, UserInfoRepositoryClickHouse>();
                 services.AddSingleton<IUserManagmentRepository, UserManagmentRepositoryClickHouse>();
+                services.AddSingleton<IFlowsRawRepository, FlowsRawRepositoryClickHouse>();
             }
             public static void AddQueryBuildersClickHouseDI(IServiceCollection services)
             {
@@ -200,6 +200,7 @@ namespace View
                 services.AddSingleton<IDifficultQueryBuilder, DifficultQueryBuilderClickHouse>();
                 services.AddSingleton<IUserInfoQueryBuilder, UserInfoQueryBuilderClickHouse>();
                 services.AddSingleton<IUserManagmentQueryBuilder, UserManagmentQueryBuilderClickHouse>();
+                services.AddSingleton<IFlowsRawQueryBuilder, FlowsRawQueryBuilder>();
             }
 
             public static void AddEntityMappersClickHouseDI(IServiceCollection services)
@@ -212,6 +213,7 @@ namespace View
                 services.AddSingleton<IEntityMapper<SystemUserDTO>, SystemUserDTOMapper>();
                 services.AddSingleton<IEntityMapper<UserInfoDTO>, UserInfoDTOMapper>();
                 services.AddSingleton<IEntityMapper<RoleDTO>, RoleDTOMapper>();
+                services.AddSingleton<IEntityMapper<FlowDTO>, FlowDTOMapper>();
             }
             public static void AddClickHouseDI(IServiceCollection services, ClickHouseConnectionPoolConfiguration config)
             {
@@ -228,5 +230,9 @@ namespace View
             }
         }
 
+        private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

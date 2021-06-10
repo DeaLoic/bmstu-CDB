@@ -17,17 +17,19 @@ namespace ModelLogic.Controllers
         protected IDestinationsRepository _destinationsRepository;
         protected IDestinationTypesRepository _destinationTypesRepository;
         protected IUserInfoRepository _userInfoRepository;
+        protected IFlowsRawRepository _flowsRawRepository;
         protected ILogger<UserController> _logger;
 
         public UserController(IDataSourcesRepository dataSourcesRepository, IDataSourceTypesRepository dataSourceTypesRepository,
             IDestinationsRepository destinationsRepository, IDestinationTypesRepository destinationTypesRepository,
-            IUserInfoRepository userInfoRepository, ILogger<UserController> logger)
+            IUserInfoRepository userInfoRepository, IFlowsRawRepository flowsRawRepository, ILogger<UserController> logger)
         {
             _dataSourcesRepository = dataSourcesRepository;
             _dataSourceTypesRepository = dataSourceTypesRepository;
             _destinationsRepository = destinationsRepository;
             _destinationTypesRepository = destinationTypesRepository;
             _userInfoRepository = userInfoRepository;
+            _flowsRawRepository = flowsRawRepository;
             _logger = logger;
         }
 
@@ -66,6 +68,14 @@ namespace ModelLogic.Controllers
             entities = _userInfoRepository.FindAll().ToList();
 
             return entities.Select((dto) => new UserInfo(dto)).ToList();
+        }
+
+        public List<Flow> FindFlowByMinutes(int minutes)
+        {
+            var entities = new List<FlowDTO>();
+            entities = _flowsRawRepository.FindForTime(minutes).ToList();
+
+            return entities.Select((dto) => new Flow(dto)).ToList();
         }
     }
 }
