@@ -67,8 +67,33 @@ CREATE MATERIALIZED VIEW IF NOT EXISTS default.flows_raw_view TO default.flows_r
     `Packets` UInt64
 ) AS
 SELECT
-    toDate(TimeReceived) AS Date, *
-FROM default.flows;
+    toDate(TimeReceived) AS Date,    
+ 	`TimeReceived`,
+    `TimeFlowStart`,
+    `SequenceNum`,
+    `SamplingRate`,
+
+    unhex(replaceRegexpOne(hex(SamplerAddress),
+ '(((\\d|[A-F]){8}).*)',
+ '\\200000000')) as SamplerAddress,
+
+    unhex(replaceRegexpOne(hex(SrcAddr),
+ '(((\\d|[A-F]){8}).*)',
+ '\\200000000')) AS SrcAddr,
+
+    unhex(replaceRegexpOne(hex(DstAddr),
+ '(((\\d|[A-F]){8}).*)',
+ '\\200000000')) AS DstAddr,
+    `SrcAS`,
+    `DstAS`,
+    `EType`,
+    `Proto`,
+    `SrcPort`,
+    `DstPort`,
+    `Bytes`,
+    `Packets`
+
+FROM default.flows
     
     
 CREATE TABLE IF NOT EXISTS data_sources (
@@ -86,21 +111,21 @@ CREATE TABLE IF NOT EXISTS data_source_types (
                         ENGINE=MergeTree()
                         ORDER BY (Type);
                        
-   CREATE TABLE IF NOT EXISTS data_destinations (
+CREATE TABLE IF NOT EXISTS data_destinations (
                         Ip String,
                         Type Int16
                         )
                         ENGINE=MergeTree()
                         ORDER BY (Ip);
                        
-   CREATE TABLE IF NOT EXISTS data_destination_types (
+CREATE TABLE IF NOT EXISTS data_destination_types (
                         Type Int16,
                         Info String
                         )
                         ENGINE=MergeTree()
                         ORDER BY (Type);
                        
-   CREATE TABLE IF NOT EXISTS user_info (
+CREATE TABLE IF NOT EXISTS user_info (
                         Id UUID,
                         Name String,
                         Post String
