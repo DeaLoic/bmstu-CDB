@@ -131,6 +131,15 @@ namespace View
             mainDataGrid.Columns.Add("CommentString", "Комментарий");
         }
 
+        private void ChangeTableMaxSpend()
+        {
+            mainDataGrid.Rows.Clear();
+            mainDataGrid.Columns.Clear();
+            mainDataGrid.Columns.Add("Type", "День");
+            mainDataGrid.Columns.Add("CommentString", "Ip");
+            mainDataGrid.Columns.Add("CommentString", "Потрачено трафика в байтах");
+        }
+
         private void ChangeTableFlowDTOTypes()
         {
             mainDataGrid.Rows.Clear();
@@ -490,6 +499,91 @@ namespace View
             {
                 MessageBox.Show("Типы узлов назначения не найдены");
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ChangeTableMaxSpend();
+            List<MaxSpendingDTO> days = null;
+            try
+            {
+                MessageBox.Show("В разработке", "Подождите", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+                days = _analysts.GetMaxSpendingDay();
+            }
+            catch (Exception error)
+            {
+                MessageBox.Show(error.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (days != null)
+            {
+                foreach (var day in days)
+                {
+                    mainDataGrid.Rows.Add(day.Date.Date.ToString(), IpTransformer.MaskToString(Encoding.ASCII.GetBytes(day.SrcIp)), day.Spend);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Типы узлов назначения не найдены");
+            }
+        }
+
+        private void tabControlMain_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+                int minutes = 0;
+                try
+                {
+                    minutes = Int32.Parse(textBoxMinutes2.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("Введите корректное целое число", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                ChangeTableFlowDTOTypes();
+                List<Flow> flows = null;
+                try
+                {
+                    flows = _userController.FindFlowByMinutes(minutes).ToList();
+                }
+                catch (Exception error)
+                {
+                    MessageBox.Show(error.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (flows != null)
+                {
+                    foreach (var flow in flows)
+                    {
+                        mainDataGrid.Rows.Add(flow.TimeReceived.ToString(),
+                                                flow.TimeFlowStart.ToString(),
+                                                flow.SequenceNum.ToString(),
+                                                flow.SamplingRate.ToString(),
+                                                flow.SamplerAddress.ToString(),
+                                                flow.SrcAddr.ToString(),
+                                                flow.DstAddr.ToString(),
+                                                flow.SrcAS.ToString(),
+                                                flow.DstAS.ToString(),
+                                                flow.EType.ToString(),
+                                                flow.Proto.ToString(),
+                                                flow.SrcPort.ToString(),
+                                                flow.DstPort.ToString(),
+                                                flow.Bytes.ToString(),
+                                                flow.Packets.ToString());
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Потоки не найдены");
+                }
+            
         }
     }
 }

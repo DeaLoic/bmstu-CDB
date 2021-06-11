@@ -16,7 +16,11 @@ namespace AccessDB.QueryBuilder.ClickHouse
         public string GetTraficCountPerSource(int minutes)
         {
             return @$"WITH subtractMinutes(now(), {minutes}) as startTime
-                       SELECT SrcAddr, sum(Bytes) FROM flows_raw where TimeFlowStart >= startTime GROUP By SrcAddr;";
+                       SELECT DstAddr, sum(Bytes) FROM flows_raw where TimeFlowStart >= startTime GROUP By DstAddr;";
+        }
+        public string GetMaxSpendingDayQuery()
+        {
+            return "SELECT \"Date\", SrcAddr, sum(Bytes) FROM flows_raw;";
         }
     }
 }

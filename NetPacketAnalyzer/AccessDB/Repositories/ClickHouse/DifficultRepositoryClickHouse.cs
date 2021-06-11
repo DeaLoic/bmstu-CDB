@@ -36,5 +36,12 @@ namespace AccessDB.Repositories.ClickHouse
             var entities = _clickHouseRepository.ExecuteQueryMapping(queryString, new SumDTOMapper());
             return entities;
         }
+
+        public IEnumerable<MaxSpendingDTO> GetMaxSpendingDay()
+        {
+            string queryString = _qbuilder.GetMaxSpendingDayQuery();
+            var entities = _clickHouseRepository.ExecuteQueryMapping(queryString, new MaxSpendingDTOMapper());
+            return entities;
+        }
     }
 }

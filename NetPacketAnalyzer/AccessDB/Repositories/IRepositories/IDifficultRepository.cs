@@ -10,5 +10,8 @@ namespace AccessDB.Repositories.IRepositories
     {
         public IEnumerable<DifficultSourcesByPostThatToDestTypeMoreThanCountDTO> FindSourcesByPostThatToDestTypeMoreThanCount(string post, int type, int count);
         public IEnumerable<SumDTO> GetTraficCountPerSource(int minutes);
+
+        public IEnumerable<MaxSpendingDTO> GetMaxSpendingDay();
+
     }
 }

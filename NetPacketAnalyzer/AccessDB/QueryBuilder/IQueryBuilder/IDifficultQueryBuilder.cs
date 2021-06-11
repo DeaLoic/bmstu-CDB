@@ -9,5 +9,6 @@ namespace AccessDB.QueryBuilder.IQueryBuilder
     {
         public string FindSourcesByPostThatToDestTypeMoreThanCount(string post, int type, int count);
         public string GetTraficCountPerSource(int minutes);
+        public string GetMaxSpendingDayQuery();
     }
 }

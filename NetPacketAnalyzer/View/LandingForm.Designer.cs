@@ -84,7 +84,6 @@ namespace View
             this.mainDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.mainDataGrid.Location = new System.Drawing.Point(12, 12);
             this.mainDataGrid.Name = "mainDataGrid";
-            this.mainDataGrid.RowTemplate.Height = 25;
             this.mainDataGrid.Size = new System.Drawing.Size(606, 426);
             this.mainDataGrid.TabIndex = 0;
             // 
@@ -294,6 +293,7 @@ namespace View
             this.tabControlMain.SelectedIndex = 0;
             this.tabControlMain.Size = new System.Drawing.Size(202, 378);
             this.tabControlMain.TabIndex = 6;
+            this.tabControlMain.SelectedIndexChanged += new System.EventHandler(this.tabControlMain_SelectedIndexChanged);
             // 
             // tabPage2
             // 
@@ -448,6 +448,7 @@ namespace View
             this.button2.TabIndex = 4;
             this.button2.Text = "Отобразить трафик за последние n минут";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // buttonr
             // 

@@ -27,5 +27,13 @@ namespace ModelLogic.Controllers
 
             return entities;
         }
+
+        public List<MaxSpendingDTO> GetMaxSpendingDay()
+        {
+            var entities = new List<MaxSpendingDTO>();
+            entities = _difficultRepository.GetMaxSpendingDay().ToList();
+
+            return entities;
+        }
     }
 }
