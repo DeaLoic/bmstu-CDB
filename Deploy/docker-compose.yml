@@ -40,7 +40,7 @@ services:
       - '0.0.0.0:2055:2055/udp'
       - '0.0.0.0:2056:2056/udp'
       - '6343:6343'
-    image: 'goflow'
+    image: 'cloudflare/goflow'
     depends_on:
       - 'kafka'
     restart: always
