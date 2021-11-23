@@ -1,4 +1,5 @@
-﻿using Qoollo.ClickHouse.Net.Repository;
+﻿using AccessDB.DbModels.PostgreSQL;
+using Qoollo.ClickHouse.Net.Repository;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,6 +10,8 @@ namespace AccessDB.DTO
 {
     public class DestinationDTO
     {
+        private DataDestination res;
+
         public string Ip { get; set; }
         public int Type { get; set; }
 
@@ -19,6 +22,12 @@ namespace AccessDB.DTO
         }
 
         public DestinationDTO() { }
+
+        public DestinationDTO(DataDestination res)
+        {
+            Ip = res.Ip;
+            Type = res.Type.Value;
+        }
 
         public IEnumerator GetEnumerator()
         {

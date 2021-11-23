@@ -8,7 +8,7 @@ using AccessDB.Repositories.IRepositories;
 
 namespace AccessDB.Repositories.ClickHouse
 {
-    public class CrudPlusRepositoryClickHouse<DTO> : CrudRepositoryClickHouse<DTO>, ICrudPlusRepository<DTO>
+    public class CrudPlusRepositoryClickHouse<DTO> : CrudRepositoryClickHouse<DTO>, ICrudRepository<DTO>
     {
         public CrudPlusRepositoryClickHouse(ICrudQueryBuilder<DTO> qbuilder, IClickHouseRepository clickHouseRepository, ILogger logger, IEntityMapper<DTO> mapper) :
             base(qbuilder, clickHouseRepository, logger, mapper)

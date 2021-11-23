@@ -1,4 +1,5 @@
-﻿using Qoollo.ClickHouse.Net.Repository;
+﻿using AccessDB.DbModels.PostgreSQL;
+using Qoollo.ClickHouse.Net.Repository;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -48,6 +49,25 @@ namespace AccessDB.DTO
         }
 
         public FlowDTO() { }
+
+        public FlowDTO(FlowsRaw w)
+        {
+            TimeReceived = w.Timereceived.Value;
+            TimeFlowStart = w.Timeflowstart.Value;
+            SequenceNum = w.Sequencenum.Value;
+            SamplingRate = w.Samplingrate.Value;
+            SamplerAddress = w.Sampleraddress;
+            SrcAddr = w.Srcaddr;
+            DstAddr = w.Dstaddr;
+            SrcAS = w.Srcas.Value;
+            DstAS = w.Dstas.Value;
+            EType = w.Etype.Value;
+            Proto = w.Proto.Value;
+            SrcPort = w.Srcport.Value;
+            DstPort = w.Dstport.Value;
+            Bytes = w.Bytes.Value;
+            Packets = w.Packets.Value;
+    }
 
         public IEnumerator GetEnumerator()
         {

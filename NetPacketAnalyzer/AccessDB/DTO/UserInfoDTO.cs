@@ -5,6 +5,7 @@ using System.Text;
 using System.Data;
 using System.Linq;
 using Qoollo.ClickHouse.Net.Repository;
+using AccessDB.DbModels.PostgreSQL;
 
 namespace AccessDB.DTO
 {
@@ -22,6 +23,13 @@ namespace AccessDB.DTO
         }
 
         public UserInfoDTO() { }
+
+        public UserInfoDTO(UserInfo w)
+        {
+            UUID = w.Id.ToString();
+            Name = w.Name;
+            Post = w.Post;
+        }
 
         public IEnumerator GetEnumerator()
         {

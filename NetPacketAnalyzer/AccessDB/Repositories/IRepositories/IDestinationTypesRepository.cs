@@ -5,7 +5,7 @@ using AccessDB.DTO;
 
 namespace AccessDB.Repositories.IRepositories
 {
-    public interface IDestinationTypesRepository : ICrudPlusRepository<DestinationTypeDTO>
+    public interface IDestinationTypesRepository : ICrudRepository<DestinationTypeDTO>
     {
     }
 }

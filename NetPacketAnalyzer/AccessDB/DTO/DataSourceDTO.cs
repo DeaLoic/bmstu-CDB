@@ -5,11 +5,13 @@ using System.Text;
 using System.Data;
 using System.Linq;
 using Qoollo.ClickHouse.Net.Repository;
+using AccessDB.DbModels.PostgreSQL;
 
 namespace AccessDB.DTO
 {
     public class DataSourceDTO : IEnumerable
     {
+
         public string Ip { get; set; }
         public string OwnerUUID { get; set; }
         public int Type { get; set; }
@@ -22,6 +24,13 @@ namespace AccessDB.DTO
         }
 
         public DataSourceDTO() { }
+
+        public DataSourceDTO(DataSource res)
+        {
+            Ip = res.Ip;
+            OwnerUUID = res.Owneruuid.ToString();
+            Type = res.Type.Value;
+        }
 
         public IEnumerator GetEnumerator()
         {

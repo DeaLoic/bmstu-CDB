@@ -1,0 +1,466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Comment CommentText="DTO">
+    <Position X="7.25" Y="11" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="Query builders">
+    <Position X="24.066" Y="1.796" Height="0.75" Width="1.7" />
+  </Comment>
+  <Comment CommentText="REPOSITORIES">
+    <Position X="10.527" Y="1.632" Height="0.75" Width="1.7" />
+  </Comment>
+  <Class Name="AccessDB.Repositories.ClickHouse.CrudPlusRepositoryClickHouse&lt;DTO&gt;" Collapsed="true">
+    <Position X="8" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Repositories\ClickHouse\CrudPlusRepositoryClickHouse.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AccessDB.Repositories.ClickHouse.CrudRepositoryClickHouse&lt;DTO&gt;" Collapsed="true">
+    <Position X="8" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAIAAARAAAAIAEIAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Repositories\ClickHouse\CrudRepositoryClickHouse.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AccessDB.Repositories.ClickHouse.DataSourcesRepositoryClickHouse" Collapsed="true">
+    <Position X="5.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\ClickHouse\DataSourcesRepositoryClickHouse.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AccessDB.Repositories.ClickHouse.DataSourceTypesRepositoryClickHouse" Collapsed="true">
+    <Position X="8" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\ClickHouse\DataSourceTypesRepositoryClickHouse.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AccessDB.Repositories.ClickHouse.DestinationsRepositoryClickHouse" Collapsed="true">
+    <Position X="12.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\ClickHouse\DestinationsRepositoryClickHouse.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AccessDB.Repositories.ClickHouse.DestinationTypesRepositoryClickHouse" Collapsed="true">
+    <Position X="3.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\ClickHouse\DestinationTypesRepositoryClickHouse.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AccessDB.Repositories.ClickHouse.DifficultRepositoryClickHouse" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAQAAAAAAAAAAAIAAABAAAAIEAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>Repositories\ClickHouse\DifficultRepositoryClickHouse.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.Repositories.ClickHouse.FlowsRawRepositoryClickHouse" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="16.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAIAAARAAAAIAAAIAAAAgAAAAggAAA=</HashCode>
+      <FileName>Repositories\ClickHouse\FlowsRawRepositoryClickHouse.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.Repositories.ClickHouse.UserInfoRepositoryClickHouse" Collapsed="true">
+    <Position X="10.25" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\ClickHouse\UserInfoRepositoryClickHouse.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="AccessDB.Repositories.ClickHouse.UserManagmentRepositoryClickHouse" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAQAAAAAMBAAhAAAAIAAAAAAAAAAAAAlAAAA=</HashCode>
+      <FileName>Repositories\ClickHouse\UserManagmentRepositoryClickHouse.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.QueryBuilder.ClickHouse.DataSourcesQueryBuilderClickHouse" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAABAgAAAAAAAAAAAAAAABAAAAAACAA=</HashCode>
+      <FileName>QueryBuilder\ClickHouse\DataSourcesQueryBuilderClickHouse.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.QueryBuilder.ClickHouse.DataSourceTypesQueryBuilderClickHouse" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAABAgAAAAAAAAAAAAAAABAAAAAACAA=</HashCode>
+      <FileName>QueryBuilder\ClickHouse\DataSourceTypesQueryBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.QueryBuilder.ClickHouse.DestinationsQueryBuilderClickHouse" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24.25" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAABAgAAAAAAAAAAAAAAABAAAAAACAA=</HashCode>
+      <FileName>QueryBuilder\ClickHouse\DestinationsQueryBuilderClickHouse.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.QueryBuilder.ClickHouse.DestinationTypesQueryBuilderClickHouse" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAABAgAAAAAAAAAAAAAAABAAAAAACAA=</HashCode>
+      <FileName>QueryBuilder\ClickHouse\DestinationTypesQueryBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.QueryBuilder.ClickHouse.DifficultQueryBuilderClickHouse" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22.5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAACAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>QueryBuilder\ClickHouse\DifficultQueryBuilderClickHouse.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.QueryBuilder.ClickHouse.FlowsRawQueryBuilder" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAIAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>QueryBuilder\ClickHouse\FlowsRawQueryBuilder.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.QueryBuilder.ClickHouse.UserInfoQueryBuilderClickHouse" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="20.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAABAgAAAAAAAAAAAAAAABAAAAAACAA=</HashCode>
+      <FileName>QueryBuilder\ClickHouse\UserInfoQueryBuilderClickHouse.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.QueryBuilder.ClickHouse.UserManagmentQueryBuilderClickHouse" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="22.5" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAigADAAAAA=</HashCode>
+      <FileName>QueryBuilder\ClickHouse\UserManagmentQueryBuilderClickHouse.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.DTO.DataSourceDTO" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABACAAAAAAAAAAAAAAAAAQAAAAAAIAA=</HashCode>
+      <FileName>DTO\DataSourceDTO.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.DTO.DataSourceDTOMapper" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>DTO\DataSourceDTO.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.DTO.DestinationDTO">
+    <Position X="15.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAQAAAAAAIAA=</HashCode>
+      <FileName>DTO\DestinationDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AccessDB.DTO.DestinationDTOMapper" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>DTO\DestinationDTO.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.DTO.DestinationTypeDTO">
+    <Position X="13.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAASAAAAAAAAA=</HashCode>
+      <FileName>DTO\DestinationTypeDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AccessDB.DTO.DestinationTypeDTOMapper" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>DTO\DestinationTypeDTO.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.DTO.DifficultSourcesByPostThatToDestTypeMoreThanCountDTO">
+    <Position X="15.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAASAAAAAAAAA=</HashCode>
+      <FileName>DTO\DifficultSourcesByPostThatToDestTypeMoreThanCountDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AccessDB.DTO.DifficultSourcesByMarkThatToDestTypeMoreThanCountDTOMapper" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.25" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>DTO\DifficultSourcesByPostThatToDestTypeMoreThanCountDTO.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.DTO.FlowDTO">
+    <Position X="12" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAABAAACEAhAAAAABAAAAQAAAEAAAAAAoAJAIAAI=</HashCode>
+      <FileName>DTO\FlowDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AccessDB.DTO.FlowDTOMapper" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>DTO\FlowDTO.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.DTO.MaxSpendingDTO" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAQAAgAAAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>DTO\MaxSpendingDTO.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.DTO.MaxSpendingDTOMapper" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.25" Y="14" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>DTO\MaxSpendingDTO.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.DTO.RoleDTO">
+    <Position X="15.75" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAAAABAIAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>DTO\RoleDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AccessDB.DTO.RoleDTOMapper" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>DTO\RoleDTO.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.DTO.SourceTypeDTO">
+    <Position X="13.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAASAAAAAAAAA=</HashCode>
+      <FileName>DTO\SourceTypeDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AccessDB.DTO.SourceTypeDTOMapper" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>DTO\SourceTypeDTO.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.DTO.SumDTO">
+    <Position X="13.75" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAABAAAAQ=</HashCode>
+      <FileName>DTO\SumDTO.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AccessDB.DTO.SumDTOMapper" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.25" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>DTO\SumDTO.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.DTO.SystemUserDTO" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAgAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>DTO\SystemUserDTO.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.DTO.SystemUserDTOMapper" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="8" Y="15" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>DTO\SystemUserDTO.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.DTO.UserInfoDTO" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="4.5" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAAEAAAAAQACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DTO\UserInfoDTO.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="AccessDB.DTO.UserInfoDTOMapper" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="6.25" Y="16" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>DTO\UserInfoDTO.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Interface Name="AccessDB.Repositories.IRepositories.ICrudPlusRepository&lt;DTO&gt;" Collapsed="true">
+    <Position X="8" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>Repositories\IRepositories\ICrudPlusRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AccessDB.Repositories.IRepositories.ICrudRepository&lt;DTO&gt;" Collapsed="true">
+    <Position X="8" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAQAAAAAAEIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\IRepositories\ICrudRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AccessDB.Repositories.IRepositories.IDataSourcesRepository" Collapsed="true">
+    <Position X="5.75" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\IRepositories\IDataSourcesRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AccessDB.Repositories.IRepositories.IDataSourceTypesRepository" Collapsed="true">
+    <Position X="8" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\IRepositories\IDataSourceTypesRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AccessDB.Repositories.IRepositories.IDestinationsRepository" Collapsed="true">
+    <Position X="12.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\IRepositories\IDestinationsRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AccessDB.Repositories.IRepositories.IDestinationTypesRepository" Collapsed="true">
+    <Position X="3.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\IRepositories\IDestinationTypesRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AccessDB.Repositories.IRepositories.IDifficultRepository" Collapsed="true">
+    <Position X="15" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAQAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\IRepositories\IDifficultRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AccessDB.Repositories.IRepositories.IFlowsRawRepository" Collapsed="true">
+    <Position X="16.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAIAAAAgAAAAAgAAA=</HashCode>
+      <FileName>Repositories\IRepositories\IFlowsRawRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AccessDB.Repositories.IRepositories.IUserInfoRepository" Collapsed="true">
+    <Position X="10.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Repositories\IRepositories\IUserInfoRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AccessDB.Repositories.IRepositories.IUserManagmentRepository" Collapsed="true">
+    <Position X="15" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAQAAAAAEBAAgAAAAAAAAAAAAAAAAAAFAAAA=</HashCode>
+      <FileName>Repositories\IRepositories\IUserManagmentRepository.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AccessDB.QueryBuilder.IQueryBuilder.ICrudQueryBuilder&lt;DTO&gt;" Collapsed="true">
+    <Position X="24.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIAAABAgAAAAAAAAAAAAAAABAAAAAACAA=</HashCode>
+      <FileName>QueryBuilder\IQueryBuilder\ICrudQueryBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AccessDB.QueryBuilder.IQueryBuilder.IDataSourcesQueryBuilder" Collapsed="true">
+    <Position X="29" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>QueryBuilder\IQueryBuilder\IDataSourcesQueryBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AccessDB.QueryBuilder.IQueryBuilder.IDataSourceTypesQueryBuilder" Collapsed="true">
+    <Position X="20" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>QueryBuilder\IQueryBuilder\IDataSourceTypesQueryBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AccessDB.QueryBuilder.IQueryBuilder.IDestinationsQueryBuilder" Collapsed="true">
+    <Position X="22.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>QueryBuilder\IQueryBuilder\IDestinationsQueryBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AccessDB.QueryBuilder.IQueryBuilder.IDestinationTypesQueryBuilder" Collapsed="true">
+    <Position X="26.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>QueryBuilder\IQueryBuilder\IDestinationTypesQueryBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AccessDB.QueryBuilder.IQueryBuilder.IDifficultQueryBuilder" Collapsed="true">
+    <Position X="20.75" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAACAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>QueryBuilder\IQueryBuilder\IDifficultQueryBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AccessDB.QueryBuilder.IQueryBuilder.IDunoQueryBuilder" Collapsed="true">
+    <Position X="22.5" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>QueryBuilder\IQueryBuilder\IDunoQueryBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AccessDB.QueryBuilder.IQueryBuilder.IFlowsRawQueryBuilder" Collapsed="true">
+    <Position X="24.25" Y="9.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAAAAAAIAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>QueryBuilder\IQueryBuilder\IFlowsRawQueryBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AccessDB.QueryBuilder.IQueryBuilder.IUserInfoQueryBuilder" Collapsed="true">
+    <Position X="24.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>QueryBuilder\IQueryBuilder\IUserInfoQueryBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AccessDB.QueryBuilder.IQueryBuilder.IUserManagmentQueryBuilder" Collapsed="true">
+    <Position X="20.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAigADAAAAA=</HashCode>
+      <FileName>QueryBuilder\IQueryBuilder\IUserManagmentQueryBuilder.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -284,6 +284,7 @@ namespace View
             }
             catch (Exception error)
             {
+                _logger.LogError("Error at {dateTime}. Error: {error}. Trace: {trace}", DateTime.UtcNow, error.Message, error.StackTrace);
                 MessageBox.Show(error.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -310,6 +311,7 @@ namespace View
             }
             catch (Exception error)
             {
+                _logger.LogError("Error at {dateTime}. Error: {error}. Trace: {trace}", DateTime.UtcNow, error.Message, error.StackTrace);
                 MessageBox.Show(error.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -337,6 +339,7 @@ namespace View
             }
             catch (Exception error)
             {
+                _logger.LogError("Error at {dateTime}. Error: {error}. Trace: {trace}", DateTime.UtcNow, error.Message, error.StackTrace);
                 MessageBox.Show(error.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -363,6 +366,7 @@ namespace View
             }
             catch (Exception error)
             {
+                _logger.LogError("Error at {dateTime}. Error: {error}. Trace: {trace}", DateTime.UtcNow, error.Message, error.StackTrace);
                 MessageBox.Show(error.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -389,6 +393,7 @@ namespace View
             }
             catch (Exception error)
             {
+                _logger.LogError("Error at {dateTime}. Error: {error}. Trace: {trace}", DateTime.UtcNow, error.Message, error.StackTrace);
                 MessageBox.Show(error.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -412,8 +417,9 @@ namespace View
             {
                 minutes = Int32.Parse(textBoxMinutes.Text);
             }
-            catch
+            catch (Exception error)
             {
+                _logger.LogError("Error at {dateTime}. Error: {error}. Trace: {trace}", DateTime.UtcNow, error.Message, error.StackTrace);
                 MessageBox.Show("Введите корректное целое число", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -426,6 +432,7 @@ namespace View
             }
             catch (Exception error)
             {
+                _logger.LogError("Error at {dateTime}. Error: {error}. Trace: {trace}", DateTime.UtcNow, error.Message, error.StackTrace);
                 MessageBox.Show(error.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -472,8 +479,9 @@ namespace View
             {
                 minutes = Int32.Parse(textBoxMinutes2.Text);
             }
-            catch
+            catch (Exception error)
             {
+                _logger.LogError("Error at {dateTime}. Error: {error}. Trace: {trace}", DateTime.UtcNow, error.Message, error.StackTrace);
                 MessageBox.Show("Введите корректное целое число", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -485,6 +493,7 @@ namespace View
             }
             catch (Exception error)
             {
+                _logger.LogError("Error at {dateTime}. Error: {error}. Trace: {trace}", DateTime.UtcNow, error.Message, error.StackTrace);
                 MessageBox.Show(error.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -513,6 +522,7 @@ namespace View
             }
             catch (Exception error)
             {
+                _logger.LogError("Error at {dateTime}. Error: {error}. Trace: {trace}", DateTime.UtcNow, error.Message, error.StackTrace);
                 MessageBox.Show(error.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
@@ -536,54 +546,55 @@ namespace View
 
         private void button2_Click(object sender, EventArgs e)
         {
-                int minutes = 0;
-                try
-                {
-                    minutes = Int32.Parse(textBoxMinutes2.Text);
-                }
-                catch
-                {
-                    MessageBox.Show("Введите корректное целое число", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
+            int minutes = 0;
+            try
+            {
+                minutes = Int32.Parse(textBoxMinutes2.Text);
+            }
+            catch (Exception error)
+            {
+                _logger.LogError("Error at {dateTime}. Error: {error}. Trace: {trace}", DateTime.UtcNow, error.Message, error.StackTrace);
+                MessageBox.Show("Введите корректное целое число", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-                ChangeTableFlowDTOTypes();
-                List<Flow> flows = null;
-                try
+            ChangeTableFlowDTOTypes();
+            List<Flow> flows = null;
+            try
+            {
+                flows = _userController.FindFlowByMinutes(minutes).ToList();
+            }
+            catch (Exception error)
+            {
+                _logger.LogError("Error at {dateTime}. Error: {error}. Trace: {trace}", DateTime.UtcNow, error.Message, error.StackTrace);
+                MessageBox.Show(error.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (flows != null)
+            {
+                foreach (var flow in flows)
                 {
-                    flows = _userController.FindFlowByMinutes(minutes).ToList();
+                    mainDataGrid.Rows.Add(flow.TimeReceived.ToString(),
+                                            flow.TimeFlowStart.ToString(),
+                                            flow.SequenceNum.ToString(),
+                                            flow.SamplingRate.ToString(),
+                                            flow.SamplerAddress.ToString(),
+                                            flow.SrcAddr.ToString(),
+                                            flow.DstAddr.ToString(),
+                                            flow.SrcAS.ToString(),
+                                            flow.DstAS.ToString(),
+                                            flow.EType.ToString(),
+                                            flow.Proto.ToString(),
+                                            flow.SrcPort.ToString(),
+                                            flow.DstPort.ToString(),
+                                            flow.Bytes.ToString(),
+                                            flow.Packets.ToString());
                 }
-                catch (Exception error)
-                {
-                    MessageBox.Show(error.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                if (flows != null)
-                {
-                    foreach (var flow in flows)
-                    {
-                        mainDataGrid.Rows.Add(flow.TimeReceived.ToString(),
-                                                flow.TimeFlowStart.ToString(),
-                                                flow.SequenceNum.ToString(),
-                                                flow.SamplingRate.ToString(),
-                                                flow.SamplerAddress.ToString(),
-                                                flow.SrcAddr.ToString(),
-                                                flow.DstAddr.ToString(),
-                                                flow.SrcAS.ToString(),
-                                                flow.DstAS.ToString(),
-                                                flow.EType.ToString(),
-                                                flow.Proto.ToString(),
-                                                flow.SrcPort.ToString(),
-                                                flow.DstPort.ToString(),
-                                                flow.Bytes.ToString(),
-                                                flow.Packets.ToString());
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Потоки не найдены");
-                }
-            
+            }
+            else
+            {
+                MessageBox.Show("Потоки не найдены");
+            }
         }
     }
 }

@@ -22,6 +22,13 @@ using Qoollo.ClickHouse.Net.ConnectionPool.Configuration;
 using Qoollo.ClickHouse.Net.ConnectionPool;
 using ModelLogic.Controllers;
 using ModelLogic.Models;
+using Npgsql;
+using Serilog;
+using Serilog.Core;
+using AccessDB.Repositories.PostgreSQL;
+using AccessDB.DbModels.PostgreSQL;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 
 namespace View
 {
@@ -31,9 +38,14 @@ namespace View
         IHost _host;
         IHostBuilder _builder;
 
+        DBType db = DBType.None;
+
+        Logger serilogLogger;
         ClickHouseConnectionPoolConfiguration _clickConfig = new ClickHouseConnectionPoolConfiguration();
         ClickHouseConnectionSettings _connectionSettings;
+        private string _connectionString;
         LoginInfo _loginInfo = new LoginInfo("", new List<RoleDTO>());
+        NpgsqlConnectionStringBuilder _postgresBuilder = new NpgsqlConnectionStringBuilder();
         public LoginForm()
         {
             _config = new ConfigurationBuilder()
@@ -88,12 +100,17 @@ namespace View
             {
                 string connectionString = _clickConfig.ConnectionStrings[0];
                 _connectionSettings = new ClickHouseConnectionSettings(connectionString);
+                db = DBType.ClickHouse;
             }
             else
             {
-                MessageBox.Show("Ошибка при чтении конфига. Проверьте наличие и корректность секции 'ClickHouseConnectionPoolConfiguration'");
+                db = DBType.None;
+                MessageBox.Show("Ошибка при чтении конфига. Проверьте наличие и корректность секции 'ClickHouseConnectionPoolConfiguration' или `PostgresConfig`");
                 Application.Exit();
             }
+            serilogLogger = new LoggerConfiguration()
+                        .WriteTo.File(_config["LoggerFile"])
+                        .CreateLogger();
         }
 
         private bool LoginProcess()
@@ -103,12 +120,14 @@ namespace View
                 var services = serviceScope.ServiceProvider;
                 var rep = services.GetRequiredService<IUserManagmentRepository>();
                 List<RoleDTO> roles = new List<RoleDTO>();
+                var logger = services.GetRequiredService<ILogger<LoginForm>>();
                 try
                 {
                     roles = rep.GetCurrentRoles().ToList();
                 }
                 catch (Exception exep)
                 {
+                    logger.LogError("Error: {error}. Trace: {trace}", exep.Message, exep.StackTrace);
                     MessageBox.Show(exep.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return false;
                 }
@@ -130,6 +149,8 @@ namespace View
             _connectionSettings.User = login;
             _connectionSettings.Password = pass;
             _clickConfig.ConnectionStrings = new List<string> { _connectionSettings.ToString() };
+            _postgresBuilder.Username = login;
+            _postgresBuilder.Password = pass;
         }
 
         private void RebuildLoginDI()
@@ -137,7 +158,14 @@ namespace View
             _builder = new HostBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
-                    DiExtensions.AddLoginLogicExtensions(services, _clickConfig);
+                    if (db == DBType.ClickHouse)
+                    {
+                        DiExtensions.AddLoginLogicExtensionsClickHouse(services, _clickConfig, serilogLogger);
+                    }
+                    else
+                    {
+                        DiExtensions.AddLoginLogicExtensionsPostgres(services, _postgresBuilder.ConnectionString);
+                    }
                 });
 
             if (_host != null)
@@ -153,13 +181,27 @@ namespace View
             _builder = new HostBuilder()
                 .ConfigureServices((hostContext, services) =>
                 {
-                    DiExtensions.AddQueryBuildersClickHouseDI(services);
-                    DiExtensions.AddEntityMappersClickHouseDI(services);
-                    DiExtensions.AddRepositoriesClickHouseDI(services);
-                    DiExtensions.AddClickHouseDI(services, _clickConfig);
-                    DiExtensions.AddControllersDI(services);
+                    if (db == DBType.ClickHouse)
+                    {
+                        DiExtensions.AddQueryBuildersClickHouseDI(services);
+                        DiExtensions.AddEntityMappersDI(services);
+                        DiExtensions.AddRepositoriesClickHouseDI(services);
+                        DiExtensions.AddClickHouseDI(services, _clickConfig);
+                        DiExtensions.AddControllersDI(services);
+                    }
+                    else
+                    {
+                        DiExtensions.AddEntityMappersDI(services);
+                        DiExtensions.AddRepositoriesPostgresDI(services);
+                        DiExtensions.AddPostgresDI(services, _postgresBuilder.ConnectionString);
+                        DiExtensions.AddControllersDI(services);
+                    }
                     services.AddSingleton<LandingForm>();
                     services.AddSingleton(provider => { return _loginInfo; });
+                    services.AddLogging(x =>
+                    {
+                        x.AddSerilog(logger: serilogLogger, dispose: true);
+                    });
                 });
 
             if (_host != null)
@@ -172,13 +214,17 @@ namespace View
 
         public static class DiExtensions
         {
-            public static void AddLoginLogicExtensions(IServiceCollection services, ClickHouseConnectionPoolConfiguration config)
+            public static void AddLoginLogicExtensionsClickHouse(IServiceCollection services, ClickHouseConnectionPoolConfiguration config, Serilog.ILogger logger)
             {
                 AddClickHouseDI(services, config);
                 //services.AddClickHouseRepository(_config.GetSection("ClickHouseConnectionPoolConfiguration"));
                 services.AddSingleton<IUserManagmentQueryBuilder, UserManagmentQueryBuilderClickHouse>();
                 services.AddSingleton<IUserManagmentRepository, UserManagmentRepositoryClickHouse>();
                 services.AddSingleton<IEntityMapper<SystemUserDTO>, SystemUserDTOMapper>();
+                services.AddLogging(x =>
+                {
+                    x.AddSerilog(logger: logger, dispose: true);
+                });
             }
             public static void AddRepositoriesClickHouseDI(IServiceCollection services)
             {
@@ -203,7 +249,7 @@ namespace View
                 services.AddSingleton<IFlowsRawQueryBuilder, FlowsRawQueryBuilder>();
             }
 
-            public static void AddEntityMappersClickHouseDI(IServiceCollection services)
+            public static void AddEntityMappersDI(IServiceCollection services)
             {
                 services.AddSingleton<IEntityMapper<DataSourceDTO>, DataSourceDTOMapper>();
                 services.AddSingleton<IEntityMapper<SourceTypeDTO>, SourceTypeDTOMapper>();
@@ -228,11 +274,45 @@ namespace View
                 services.AddSingleton<AnalystController>();
                 services.AddSingleton<GuestController>();
             }
+
+            public static void AddPostgresDI(IServiceCollection services, string connectionString)
+            { 
+                services.AddDbContext<defaultContext>(option => option.UseNpgsql(connectionString));
+                
+            }
+            public static void AddLoginLogicExtensionsPostgres(IServiceCollection services, string connectionString)
+            {   
+                AddPostgresDI(services, connectionString);
+                //services.AddSingleton<IUserManagmentRepository, UserManagmentRepositoryPostgreSQL>();
+                services.AddSingleton<IEntityMapper<SystemUserDTO>, SystemUserDTOMapper>();
+                
+            }
+
+            public static void AddRepositoriesPostgresDI(IServiceCollection services)
+            { 
+                services.AddSingleton<IDataSourcesRepository, DataSourcesRepositoryPostgreSQL>();
+                services.AddSingleton<IDataSourceTypesRepository, DataSourceTypesRepositoryPostgreSQL>();
+                services.AddSingleton<IDestinationsRepository, DestinationsRepositoryPostgreSQL>();
+                services.AddSingleton<IDestinationTypesRepository, DestinationTypesRepositoryPostgreSQL>();
+                services.AddSingleton<IDifficultRepository, DifficultRepositoryPostgreSQL>();
+                services.AddSingleton<IUserInfoRepository, UserInfoRepositoryPostgreSQL>();
+                //services.AddSingleton<IUserManagmentRepository, UserManagmentRepositoryPostgreSQL>();
+                services.AddSingleton<IFlowsRawRepository, FlowsRawRepositoryPostgreSQL>();
+                
+            }
         }
 
         private void LoginForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }
+
+        private enum DBType
+        {
+            ClickHouse,
+            Postgres,
+            None
+        }
     }
+
 }

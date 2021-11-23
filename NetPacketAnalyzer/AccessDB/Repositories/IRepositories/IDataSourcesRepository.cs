@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AccessDB.Repositories.IRepositories
 {
-    public interface IDataSourcesRepository : ICrudPlusRepository<DataSourceDTO>
+    public interface IDataSourcesRepository : ICrudRepository<DataSourceDTO>
     {
     }
 }

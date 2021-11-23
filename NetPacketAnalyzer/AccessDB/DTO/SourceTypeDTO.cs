@@ -20,6 +20,12 @@ namespace AccessDB.DTO
 
         public SourceTypeDTO() { }
 
+        public SourceTypeDTO(AccessDB.DbModels.PostgreSQL.DataSourceType res)
+        {
+            Type = res.Type;
+            CommentString = res.Info;
+        }
+
         public IEnumerator GetEnumerator()
         {
             yield return Type;

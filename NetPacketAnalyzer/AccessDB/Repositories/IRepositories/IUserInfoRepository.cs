@@ -5,7 +5,7 @@ using System.Text;
 
 namespace AccessDB.Repositories.IRepositories
 {
-    public interface IUserInfoRepository : ICrudPlusRepository<UserInfoDTO>
+    public interface IUserInfoRepository : ICrudRepository<UserInfoDTO>
     {
     }
 }

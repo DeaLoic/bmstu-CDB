@@ -5,6 +5,7 @@ using Qoollo.ClickHouse.Net.Repository;
 using Microsoft.Extensions.Logging;
 using AccessDB.QueryBuilder.IQueryBuilder;
 using AccessDB.Repositories.IRepositories;
+using System.Linq;
 
 namespace AccessDB.Repositories.ClickHouse
 {
@@ -25,6 +26,7 @@ namespace AccessDB.Repositories.ClickHouse
         {
             string createQuery = _qbuilder.AddQuery(dto);
             _clickHouseRepository.ExecuteNonQuery(createQuery);
+            _logger.LogInformation("Entity {Type} was added", typeof(DTO), DateTime.UtcNow);
         }
 
 
@@ -32,18 +34,22 @@ namespace AccessDB.Repositories.ClickHouse
         {
             string deleteQuery = _qbuilder.DeleteQuery(dto);
             _clickHouseRepository.ExecuteNonQuery(deleteQuery);
+            _logger.LogInformation("Entity {Type} was deleted", typeof(DTO));
         }
 
         public IEnumerable<DTO> Find(DTO dto)
         {
             string findQuery = _qbuilder.FindQuery(dto);
             var entities = _clickHouseRepository.ExecuteQueryMapping(findQuery, _mapper);
+            _logger.LogInformation("Entity {Type} was finded {N}-time", typeof(DTO), entities.ToList().Count());
             return entities;
         }
+
         public IEnumerable<DTO> FindAll()
         {
             string findAllQuery = _qbuilder.FindAllQuery();
             var entities = _clickHouseRepository.ExecuteQueryMapping(findAllQuery, _mapper);
+            _logger.LogInformation("Entity {Type} was finded", typeof(DTO), entities.ToList().Count());
             return entities;
         }
     }
