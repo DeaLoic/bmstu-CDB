@@ -184,7 +184,7 @@ namespace TechUI
         }
         void GetFlow24()
         {
-            List<Flow> flows = _guest.FindFlowByMinutes(60 * 24 * 2);
+            List<ModelLogic.Models.Flow> flows = _guest.FindFlowByMinutes(60 * 24 * 2);
             if (flows != null)
             {
                 foreach (var flow in flows)
@@ -394,7 +394,7 @@ namespace TechUI
             services.AddSingleton<IEntityMapper<SystemUserDTO>, SystemUserDTOMapper>();
             services.AddSingleton<IEntityMapper<UserInfoDTO>, UserInfoDTOMapper>();
             services.AddSingleton<IEntityMapper<RoleDTO>, RoleDTOMapper>();
-            services.AddSingleton<IEntityMapper<FlowDTO>, FlowDTOMapper>();
+            services.AddSingleton<IEntityMapper<AccessDB.DTO.FlowClickHouse>, FlowDTOMapper>();
         }
         public static void AddClickHouseDI(IServiceCollection services, ClickHouseConnectionPoolConfiguration config)
         {

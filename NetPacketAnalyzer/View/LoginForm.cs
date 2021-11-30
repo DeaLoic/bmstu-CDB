@@ -259,7 +259,7 @@ namespace View
                 services.AddSingleton<IEntityMapper<SystemUserDTO>, SystemUserDTOMapper>();
                 services.AddSingleton<IEntityMapper<UserInfoDTO>, UserInfoDTOMapper>();
                 services.AddSingleton<IEntityMapper<RoleDTO>, RoleDTOMapper>();
-                services.AddSingleton<IEntityMapper<FlowDTO>, FlowDTOMapper>();
+                services.AddSingleton<IEntityMapper<AccessDB.DTO.FlowClickHouse>, FlowDTOMapper>();
             }
             public static void AddClickHouseDI(IServiceCollection services, ClickHouseConnectionPoolConfiguration config)
             {

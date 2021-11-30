@@ -1,4 +1,4 @@
-﻿using AccessDB.Enums;
+﻿using DataObjects.Enums;
 using AccessDB.QueryBuilder.IQueryBuilder;
 using System;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Text;
 
 namespace AccessDB.QueryBuilder.ClickHouse
 {
-    public class UserManagmentQueryBuilderClickHouse : IUserManagmentQueryBuilder
+    public class UserManagmentQueryBuilderClickHouse //: IUserManagmentQueryBuilder
     {
         public string AddUserQuery(string login, string pass)
         {
@@ -26,12 +26,14 @@ namespace AccessDB.QueryBuilder.ClickHouse
         }
         public string RevokeRoleUserQuery(string login, Role role)
         {
-            return @$"revoke {RoleExtension.RoleEnumToString(role)} from {login};";
+            // return @$"revoke {Role.RoleEnumToString(role)} from {login};";
+            return "";
         }
 
         public string GrantRoleUserQuery(string login, Role role)
         {
-            return @$"grant {RoleExtension.RoleEnumToString(role)} to {login};";
+            // return @$"grant {Role.RoleEnumToString(role)} to {login};";
+            return "";
         }
         public string CurrentRolesQuery()
         {

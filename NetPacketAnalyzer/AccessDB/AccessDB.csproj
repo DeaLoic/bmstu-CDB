@@ -42,8 +42,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\ЗщыепкуЫЙД\" />
-    <Folder Include="Repositories\Новая папка\" />
+    <ProjectReference Include="..\DataObjects\DataObjects.csproj" />
   </ItemGroup>
 
 </Project>

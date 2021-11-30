@@ -16,5 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AccessDB\AccessDB.csproj" />
+    <ProjectReference Include="..\DataObjects\DataObjects.csproj" />
   </ItemGroup>
 </Project>
