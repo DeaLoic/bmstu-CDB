@@ -1,0 +1,73 @@
+version: "3"
+
+networks:
+  kafka-net:
+    driver: bridge
+
+services:
+  zookeeper:
+    image: 'bitnami/zookeeper:latest'
+    networks: 
+      - "kafka-net"
+    ports:
+      - '2181:2181'
+    environment:
+      - ALLOW_ANONYMOUS_LOGIN=yes
+    restart: always 
+
+  kafka:
+    image: 'bitnami/kafka:latest'
+    networks: 
+      - 'kafka-net'
+    ports:
+      - '9092:9092'
+    environment:
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_ZOOKEEPER_CONNECT=zookeeper:2181
+      - KAFKA_DELETE_TOPIC_ENABLE=true
+      - KAFKA_OFFSETS_TOPIC_REPLICATION=1
+      - KAFKA_TOPICS_CREATE=flows:2:1
+    restart: always
+    depends_on:
+      - 'zookeeper'
+
+  goflow: 
+    image: "cloudflare/goflow:latest"
+    networks: 
+      - 'kafka-net'
+    ports:
+      - '0.0.0.0:2055:2055/udp'
+      - '0.0.0.0:2056:2056/udp'
+    restart: always
+    depends_on:
+      - 'kafka'
+    command: >
+       -kafka.brokers kafka:9092 -kafka.topic flows -proto.fixedlen=true -nfl.addr 0.0.0.0 -nf.addr 0.0.0.0
+  clickhouse:
+    ports:
+      - '0.0.0.0:8123:8123'
+    networks: 
+      - 'kafka-net'
+    image: yandex/clickhouse-server
+    volumes:
+      - "./config/clickhouse/config.xml:/etc/clickhouse-server/config.xml"
+      - "./config/clickhouse/users.xml:/etc/clickhouse-server/users.xml"
+      - "./config/clickhouse/flow.proto:/var/lib/clickhouse/format_schemas/flow.proto" # format for data from kafka
+      - "./data/data:/var/lib/clickhouse/data"
+      - "./data/metadata:/var/lib/clickhouse/metadata"
+
+  clickhouse-init:
+    networks: 
+      - 'kafka-net'
+    image: yandex/clickhouse-client
+    volumes:
+      - "./config/clickhouse/init.sql:/etc/clickhouse-client/init.sql"
+    entrypoint: |
+      bash -c '
+      sleep 5
+      export HOME=/etc/clickhouse-client/
+      cd /etc/clickhouse-client/
+      pwd
+      cat init.sql | clickhouse client --host clickhouse --multiquery'
+    depends_on:
+      - clickhouse           
