@@ -17,16 +17,17 @@ namespace ModelLogic.Controllers
         {
             _flowsRawRepository = flowsRawRepository;
         }
-        public List<Flow> FindFlowByMinutes(int minutes)
+
+        public List<Flow> FindFiltered(FlowFilters filters)
         {
-            var entities = _flowsRawRepository.FindForTime(minutes).ToList();
+            var entities = _flowsRawRepository.FindFiltered(filters).ToList();
 
             return entities;
         }
 
-        public List<Flow> FindForTimePeriod(int start, int stop)
+        public List<Flow> FindAll()
         {
-            var entities = _flowsRawRepository.FindForTimePeriod(start, stop).ToList();
+            var entities = _flowsRawRepository.FindAll().ToList();
 
             return entities;
         }
