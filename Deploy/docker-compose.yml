@@ -45,7 +45,8 @@ services:
        -kafka.brokers kafka:9092 -kafka.topic flows -proto.fixedlen=true -nfl.addr 0.0.0.0 -nf.addr 0.0.0.0
   clickhouse:
     ports:
-      - '0.0.0.0:8123:8123'
+      - '192.168.1.53:8123:8123'
+      - '192.168.1.53:9000:9000'
     networks: 
       - 'kafka-net'
     image: yandex/clickhouse-server
@@ -70,4 +71,22 @@ services:
       pwd
       cat init.sql | clickhouse client --host clickhouse --multiquery'
     depends_on:
-      - clickhouse           
+      - clickhouse     
+
+  posstgres:
+    ports:
+      - '192.168.1.53:5432:5432'
+    networks: 
+      - 'kafka-net'
+    image: postgres
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=default
+      - APP_DB_USER=default
+      - APP_DB_PASS=default
+      - APP_DB_NAME=default
+    volumes:
+      - "./config/postgres/init.sh:/etc/init.sh"
+    command:
+      /bin/sh -c "/etc/init.sh"   
