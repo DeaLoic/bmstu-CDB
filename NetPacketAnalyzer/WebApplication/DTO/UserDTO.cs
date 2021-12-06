@@ -8,12 +8,12 @@ namespace WebApplication.DTO
 {
     public class UserDTO
     {
-        public int Id { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
-        public Role Role { get; set; }
+        public int Id { get; }
+        public string Username { get; }
+        public string Password { get; }
+        public int Role { get; }
 
-        public UserDTO(string login, string password, Role role, int id=0)
+        public UserDTO(string login, string password, int role, int id=0)
         {
             Username = login;
             Password = password;

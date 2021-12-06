@@ -6,7 +6,7 @@ namespace DataObjects.Enums
 {
     public enum Role
     {
-        Guest,
+        Guest = 0,
         Analyst,
         Admin,
         Error

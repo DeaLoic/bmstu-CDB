@@ -26,12 +26,6 @@ namespace AccessDB.Repositories.ClickHouse
             _mapper = mapper;
         }
 
-        public void DeleteForTime(int minutes)
-        {
-            string deleteQuery = _qbuilder.DeleteForTimeQuery(minutes);
-            _clickHouseRepository.ExecuteNonQuery(deleteQuery);
-        }
-
         public IEnumerable<Flow> FindAll()
         {
             string findFlowsQuery = _qbuilder.FindAllQuery();
@@ -39,14 +33,9 @@ namespace AccessDB.Repositories.ClickHouse
             return flows.Select(c => FlowMapperDB.MapClickHouse(c));
         }
 
-        public IEnumerable<Flow> FindForTime(int minutes)
+        public IEnumerable<Flow> FindFiltered(FlowFilters filters)
         {
-            return FindForTimePeriod(minutes, 0);
-        }
-
-        public IEnumerable<Flow> FindForTimePeriod(int minutesStart, int minutesEnd)
-        {
-            string findFlowsQuery = _qbuilder.FindForTimePeriodQuery(minutesStart, minutesEnd);
+            string findFlowsQuery = _qbuilder.FindFilteredQuery(filters);
             var flows = _clickHouseRepository.ExecuteQueryMapping(findFlowsQuery, _mapper);
             return flows.Select(c => FlowMapperDB.MapClickHouse(c));
         }

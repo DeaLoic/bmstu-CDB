@@ -10,6 +10,9 @@ BMSTU 2020-2021. 6th Semester IU7
 3. Clickhouse + kafka
 4. Добавление/удаление пользователей, разделение ролей.
 
+### Figma
+https://www.figma.com/file/LbDBLHtXgVEshG70mg1Ka8/lab_02
+
 ### Use-case диаграмма системы
 ![Use-case](Report/images/use-case.png)
 
@@ -17,3 +20,4 @@ BMSTU 2020-2021. 6th Semester IU7
 ### ER-диаграмма сущностей системы
 
 ![Use-case](ER-web.png)
+

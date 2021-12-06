@@ -10,21 +10,43 @@ namespace AccessDB.DbModels.ClickHouse
 {
     public class FlowClickHouse
     {
-        public DateTime TimeReceived { get; set; }
-        public DateTime TimeFlowStart { get; set; }
-        public int SequenceNum { get; set; }
-        public int SamplingRate { get; set; }
-        public string SamplerAddress { get; set; }
-        public string SrcAddr { get; set; }
-        public string DstAddr { get; set; }
-        public int SrcAS { get; set; }
-        public int DstAS { get; set; }
-        public int EType { get; set; }
-        public int Proto { get; set; }
-        public int SrcPort { get; set; }
-        public int DstPort { get; set; }
-        public int Bytes { get; set; }
-        public int Packets { get; set; }
+        public DateTime TimeReceived { get; }
+        public DateTime TimeFlowStart { get; }
+        public int SequenceNum { get; }
+        public int SamplingRate { get; }
+        public string SamplerAddress { get; }
+        public string SrcAddr { get; }
+        public string DstAddr { get; }
+        public int SrcAS { get; }
+        public int DstAS { get; }
+        public int EType { get; }
+        public int Proto { get; }
+        public int SrcPort { get; }
+        public int DstPort { get; }
+        public int Bytes { get; }
+        public int Packets { get; }
+
+        public FlowClickHouse(DateTime TimeReceived, DateTime TimeFlowStart, int SequenceNum,
+                              int SamplingRate, string SamplerAddress, string SrcAddr,
+                              string DstAddr, int SrcAS, int DstAS, int EType, int Proto,
+                              int SrcPort, int DstPort, int Bytes, int Packets)
+        {
+            this.TimeReceived = TimeReceived;
+            this.TimeFlowStart = TimeFlowStart;
+            this.SequenceNum  = SequenceNum;
+            this.SamplingRate = SamplingRate;
+            this.SamplerAddress = SamplerAddress;
+            this.SrcAddr = SrcAddr;
+            this.DstAddr = DstAddr;
+            this.SrcAS = SrcAS;
+            this.DstAS = DstAS;
+            this.EType = EType;
+            this.Proto = Proto;
+            this.SrcPort = SrcPort;
+            this.DstPort = DstPort;
+            this.Bytes = Bytes;
+            this.Packets = Packets;
+        }
 
         public FlowClickHouse(IDataReader reader)
         {
@@ -47,8 +69,6 @@ namespace AccessDB.DbModels.ClickHouse
             Bytes = reader.GetInt32(reader.GetOrdinal("Bytes"));
             Packets = reader.GetInt32(reader.GetOrdinal("Packets"));
         }
-
-        public FlowClickHouse() { }
 
         public IEnumerator GetEnumerator()
         {
