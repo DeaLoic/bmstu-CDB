@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebApplication.DTO;
 using WebApplication.DataMappers;
 using DataObjects.Models;
+using DataObjects.Enums;
 using ModelLogic.Controllers;
 
 namespace WebApplication.Controllers
@@ -35,11 +36,10 @@ namespace WebApplication.Controllers
         /// <param name="dst">Временная метка "до"</param>
         /// <returns>Потоки</returns>
         /// <response code="200">Успешно выведено</response>
-        /// <response code="404">Записей нет</response>
-        /// <response code="500">Внутренняя ошибка</response>
+        /// <response code="502">Внутренняя необрабатываемая ошибка БД</response>
         [HttpGet]
         [ProducesResponseType(typeof(List<FlowDTO>), statusCode: StatusCodes.Status200OK)]
-        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        [ProducesResponseType(statusCode: StatusCodes.Status502BadGateway)]
         public IActionResult GetAll([FromQuery] DateTime? from = null, [FromQuery] DateTime? to = null,
                                     [FromQuery] int? bytes_min = null, [FromQuery] int? bytes_max = null,
                                     [FromQuery] string? src = null, [FromQuery] string? dst = null)
@@ -48,11 +48,12 @@ namespace WebApplication.Controllers
             FlowFilters filters = new FlowFilters(MinTimeFlowStart: from, MaxTimeFlowStart: to,
                                                   MinBytes: bytes_min, MaxBytes: bytes_max,
                                                   SrcAddr: src, DstAddr: dst);
-            
-            flows = _flowController.FindFiltered(filters);
-            if (flows == null)
+
+            Error error;
+            (flows, error) = _flowController.FindFiltered(filters);
+            if (error == Error.Internal || flows == null)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status502BadGateway);
             }
 
             return Ok(flows.Select(c => FlowMapperDTO.MapToDto(c)).ToList());

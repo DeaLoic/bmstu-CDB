@@ -1,6 +1,7 @@
 ﻿using AccessDB.Repositories.IRepositories;
 using Microsoft.Extensions.Logging;
 using DataObjects.Models;
+using DataObjects.Enums;
 using Qoollo.ClickHouse.Net.ConnectionPool;
 using System;
 using System.Collections.Generic;
@@ -18,18 +19,36 @@ namespace ModelLogic.Controllers
             _flowsRawRepository = flowsRawRepository;
         }
 
-        public List<Flow> FindFiltered(FlowFilters filters)
+        public (List<Flow>, Error) FindFiltered(FlowFilters filters)
         {
-            var entities = _flowsRawRepository.FindFiltered(filters).ToList();
+            Error error = Error.OK;
+            List<Flow> entities = null;
+            try
+            {
+                entities = _flowsRawRepository.FindFiltered(filters).ToList();
+            }
+            catch (Exception ex)
+            {
+                error = Error.Internal;
+            }
 
-            return entities;
+            return (entities, error);
         }
 
-        public List<Flow> FindAll()
+        public (List<Flow>, Error) FindAll()
         {
-            var entities = _flowsRawRepository.FindAll().ToList();
+            Error error = Error.OK;
+            List<Flow> entities = null;
+            try
+            {
+                entities = _flowsRawRepository.FindAll().ToList();
+            }
+            catch (Exception ex)
+            {
+                error = Error.Internal;
+            }
 
-            return entities;
+            return (entities, error);
         }
     }
 }

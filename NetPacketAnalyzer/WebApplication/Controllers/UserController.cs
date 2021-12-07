@@ -31,20 +31,22 @@ namespace WebApplication.Controllers
         /// <param name="login">Найти по логину</param>
         /// <returns>Пользователи</returns>
         /// <response code="200">Успешно выведено</response>
-        /// <response code="404">Записей нет</response>
+        /// <response code="502">Ошибка БД</response>
         [HttpGet]
         [ProducesResponseType(typeof(List<UserDTO>), statusCode: StatusCodes.Status200OK)]
-        [ProducesResponseType(statusCode: StatusCodes.Status404NotFound)]
+        [ProducesResponseType(statusCode: StatusCodes.Status502BadGateway)]
         public IActionResult GetAll([FromQuery] string? login = null)
         {
             List<User> users = null;
+            Error error;
             if (login == null)
             {
-                users = _userController.FindAllUsers();
+                (users, error) = _userController.FindAllUsers();
             }
             else
             {
-                var user = _userController.FindUserByLogin(login);
+                User user = null;
+                (user, error) = _userController.FindUserByLogin(login);
                 if (user != null)
                 {
                     users = new List<User>();
@@ -52,33 +54,57 @@ namespace WebApplication.Controllers
                 }
             }
 
-
-            if (users == null)
+            if (error == Error.Internal || users == null)
             {
-                return NotFound();
+                return StatusCode(StatusCodes.Status502BadGateway);
             }
 
             return Ok(users.Select(c => UserMapperDTO.MapToDto(c)).ToList());
         }
 
-        
+
         /// <summary>
         /// Добавление нового пользователя
         /// </summary>
         /// <param name="userCreateDTO">Пользователь</param>
-        /// <response code="201">Успешно создано</response>
-        /// <response code="300">Успешно проведено</response>
-        /// <response code="100">Успешно проведено</response>
+        /// <response code="200">Успешно добавлено</response>
+        /// <response code="409">Пользователь уже есть</response>
+        /// <response code="500">Не добавилось в БД без ошибки БД</response>
+        /// <response code="502">Ошибка БД</response>
         [HttpPost]
         [ProducesResponseType(statusCode: StatusCodes.Status201Created)]
-        [ProducesResponseType(statusCode: StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(statusCode: StatusCodes.Status409Conflict)]
+        [ProducesResponseType(statusCode: StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(statusCode: StatusCodes.Status502BadGateway)]
         public IActionResult Add([FromBody] UserCreateDTO userCreateDTO)
         {
-            _userController.CreateUser(userCreateDTO.Username, userCreateDTO.Password, userCreateDTO.Role);
-            var user = _userController.FindUserByLogin(userCreateDTO.Username);
+            Error error;
+            User user;
+            (user, error) = _userController.FindUserByLogin(userCreateDTO.Username);
+            if (error == Error.Internal)
+            {
+                return StatusCode(StatusCodes.Status502BadGateway);
+            }
+            if (user != null)
+            {
+                return StatusCode(StatusCodes.Status409Conflict);
+            }
+
+            error = _userController.CreateUser(userCreateDTO.Username, userCreateDTO.Password, userCreateDTO.Role);
+            if (error == Error.Internal)
+            {
+                return StatusCode(StatusCodes.Status502BadGateway);
+            }
+
+            (user, error) = _userController.FindUserByLogin(userCreateDTO.Username);
+            if (error == Error.Internal)
+            {
+                return StatusCode(StatusCodes.Status502BadGateway);
+            }
+
             if (user == null)
             {
-                BadRequest();
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
             return Ok();
@@ -88,18 +114,42 @@ namespace WebApplication.Controllers
         /// Удваление пользователя
         /// </summary>
         /// <param name="login">Логин пользователя</param>
-        /// <response code="200">Успешно проведено</response>
-        /// <response code="400">Плохой запрос</response>
+        /// <response code="200">Удалено</response>
+        /// <response code="500">Не удалилось из БД без ошибки БД</response>
+        /// <response code="502">Ошибка БД</response>
         [HttpDelete]
         [ProducesResponseType(statusCode: StatusCodes.Status200OK)]
-        [ProducesResponseType(statusCode: StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(statusCode: StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(statusCode: StatusCodes.Status502BadGateway)]
         public IActionResult Delete([FromQuery] string login)
         {
-            _userController.DeleteUser(login);
-            var user = _userController.FindUserByLogin(login);
+            Error error;
+            User user;
+            (user, error) = _userController.FindUserByLogin(login);
+            if (error == Error.Internal)
+            {
+                return StatusCode(StatusCodes.Status502BadGateway);
+            }
+            if (user == null)
+            {
+                return StatusCode(StatusCodes.Status200OK);
+            }
+
+            error = _userController.DeleteUser(login);
+            if (error == Error.Internal)
+            {
+                return StatusCode(StatusCodes.Status502BadGateway);
+            }
+
+            (user, error) = _userController.FindUserByLogin(login);
+            if (error == Error.Internal)
+            {
+                return StatusCode(StatusCodes.Status502BadGateway);
+            }
+
             if (user != null)
             {
-                BadRequest();
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
             return Ok();
@@ -110,19 +160,32 @@ namespace WebApplication.Controllers
         /// </summary>
         /// <param name="login">Логин изменяемого пользователя</param>
         /// /// <param name="role">Новая роль</param>
-        /// <response code="200">Успешно изменено</response>
-        /// <response code="404">Такой записи нет</response>
+        /// <response code="200">Удалено</response>
+        /// <response code="500">Не изменилась роль без ошибки БД</response>
+        /// <response code="502">Ошибка БД</response>
         [HttpPatch]
         [ProducesResponseType(statusCode: StatusCodes.Status200OK)]
-        [ProducesResponseType(statusCode: StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(statusCode: StatusCodes.Status500InternalServerError)]
+        [ProducesResponseType(statusCode: StatusCodes.Status502BadGateway)]
         public IActionResult ChangeUser([FromQuery] string login, [FromQuery] Role role)
         {
-            //var role = RoleExtension.IntToEnum(role);
-            _userController.GrantUserRole(login, role);
-            var user = _userController.FindUserByLogin(login);
+            Error error;
+            error = _userController.GrantUserRole(login, role);
+            if (error == Error.Internal)
+            {
+                return StatusCode(StatusCodes.Status502BadGateway);
+            }
+
+            User user;
+            (user, error) = _userController.FindUserByLogin(login);
+            if (error == Error.Internal)
+            {
+                return StatusCode(StatusCodes.Status502BadGateway);
+            }
+
             if (user == null || role != user.Role)
             {
-                BadRequest();
+                return StatusCode(StatusCodes.Status500InternalServerError);
             }
 
             return Ok();

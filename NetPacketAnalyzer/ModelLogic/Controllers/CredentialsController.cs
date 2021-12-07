@@ -19,32 +19,81 @@ namespace ModelLogic.Controllers
             _credentialRepository = credentialRepository;
         }
 
-        public List<User> FindAllUsers()
+        public (List<User>, Error) FindAllUsers()
         {
-            var entities = _credentialRepository.FindAllUsers().ToList();
+            Error error = Error.OK;
+            List<User> entities = null;
+            try
+            {
+                entities = _credentialRepository.FindAllUsers().ToList();
+            }
+            catch (Exception ex)
+            {
+                error = Error.Internal;
+            }
 
-            return entities;
+            return (entities, error);
         }
 
-        public User FindUserByLogin(string login)
+        public (User, Error) FindUserByLogin(string login)
         {
-            User entity = _credentialRepository.FindUser(login);
+            Error error = Error.OK;
+            User entity = null;
+            try
+            {
+                entity = _credentialRepository.FindUser(login);
+            }
+            catch (Exception ex)
+            {
+                error = Error.Internal;
+            }
 
-            return entity;
+            return (entity, error);
         }
 
-        public void CreateUser(string login, string pass, Role role)
+        public Error CreateUser(string login, string pass, Role role)
         {
-            _credentialRepository.CreateUser(new User(login, pass, role)); 
+            Error error = Error.OK;
+            try
+            {
+                _credentialRepository.CreateUser(new User(login, pass, role));
+            }
+            catch (Exception ex)
+            {
+                error = Error.Internal;
+            }
+
+            return error;
         }
 
-        public void DeleteUser(string login)
+        public Error DeleteUser(string login)
         {
-            _credentialRepository.DeleteUser(login);
+            Error error = Error.OK;
+            try
+            {
+                _credentialRepository.DeleteUser(login);
+            }
+            catch (Exception ex)
+            {
+                error = Error.Internal;
+            }
+
+            return error;
         }
-        public void GrantUserRole(string login, Role role)
+        public Error GrantUserRole(string login, Role role)
         {
-            _credentialRepository.GrantUserRole(login, role);
+            Error error = Error.OK;
+            try
+            {
+                _credentialRepository.GrantUserRole(login, role);
+            }
+            catch (Exception ex)
+            {
+                error = Error.Internal;
+            }
+
+            return error;
+            
         }
     }
 }
