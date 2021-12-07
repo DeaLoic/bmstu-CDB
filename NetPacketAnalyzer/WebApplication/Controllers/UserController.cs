@@ -65,15 +65,17 @@ namespace WebApplication.Controllers
         /// <summary>
         /// Добавление нового пользователя
         /// </summary>
-        /// <param name="userDTO">Пользователь</param>
-        /// <response code="200">Успешно проведено</response>
+        /// <param name="userCreateDTO">Пользователь</param>
+        /// <response code="201">Успешно создано</response>
+        /// <response code="300">Успешно проведено</response>
+        /// <response code="100">Успешно проведено</response>
         [HttpPost]
-        [ProducesResponseType(statusCode: StatusCodes.Status200OK)]
+        [ProducesResponseType(statusCode: StatusCodes.Status201Created)]
         [ProducesResponseType(statusCode: StatusCodes.Status400BadRequest)]
-        public IActionResult Add([FromBody] UserDTO userDTO)
+        public IActionResult Add([FromBody] UserCreateDTO userCreateDTO)
         {
-            _userController.CreateUser(userDTO.Username, userDTO.Password, RoleExtension.IntToEnum(userDTO.Role));
-            var user = _userController.FindUserByLogin(userDTO.Username);
+            _userController.CreateUser(userCreateDTO.Username, userCreateDTO.Password, userCreateDTO.Role);
+            var user = _userController.FindUserByLogin(userCreateDTO.Username);
             if (user == null)
             {
                 BadRequest();
@@ -85,7 +87,7 @@ namespace WebApplication.Controllers
         /// <summary>
         /// Удваление пользователя
         /// </summary>
-        /// <param name="userDTO">Пользователь</param>
+        /// <param name="login">Логин пользователя</param>
         /// <response code="200">Успешно проведено</response>
         /// <response code="400">Плохой запрос</response>
         [HttpDelete]
@@ -106,17 +108,18 @@ namespace WebApplication.Controllers
         /// <summary>
         /// Изменение роли пользователя
         /// </summary>
-        /// <param name="userDTO">Экземпляр изменяемого пользователя</param>
+        /// <param name="login">Логин изменяемого пользователя</param>
+        /// /// <param name="role">Новая роль</param>
         /// <response code="200">Успешно изменено</response>
         /// <response code="404">Такой записи нет</response>
         [HttpPatch]
         [ProducesResponseType(statusCode: StatusCodes.Status200OK)]
         [ProducesResponseType(statusCode: StatusCodes.Status400BadRequest)]
-        public IActionResult ChangeUser([FromBody] UserDTO userDTO)
+        public IActionResult ChangeUser([FromQuery] string login, [FromQuery] Role role)
         {
-            var role = RoleExtension.IntToEnum(userDTO.Role);
-            _userController.GrantUserRole(userDTO.Username, RoleExtension.IntToEnum(userDTO.Role));
-            var user = _userController.FindUserByLogin(userDTO.Username);
+            //var role = RoleExtension.IntToEnum(role);
+            _userController.GrantUserRole(login, role);
+            var user = _userController.FindUserByLogin(login);
             if (user == null || role != user.Role)
             {
                 BadRequest();

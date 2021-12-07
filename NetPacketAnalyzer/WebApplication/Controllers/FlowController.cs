@@ -48,12 +48,8 @@ namespace WebApplication.Controllers
             FlowFilters filters = new FlowFilters(MinTimeFlowStart: from, MaxTimeFlowStart: to,
                                                   MinBytes: bytes_min, MaxBytes: bytes_max,
                                                   SrcAddr: src, DstAddr: dst);
-
-            if (to != null)
-            {
-                flows = _flowController.FindFiltered(filters);
-            }
-
+            
+            flows = _flowController.FindFiltered(filters);
             if (flows == null)
             {
                 return NotFound();
