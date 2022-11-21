@@ -1,27 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using DataObjects.Models;
 using AccessDB.QueryBuilder.IQueryBuilder;
 
 namespace AccessDB.QueryBuilder.ClickHouse
 {
     public class FlowsRawQueryBuilder : IFlowsRawQueryBuilder
     {
-        // period = [curTime - minutes, curTime]
-        public string DeleteForTimeQuery(int minutes)
+        public string FindFilteredQuery(FlowFilters filters)
         {
-            return @$"ALTER TABLE IF EXISTS flows_raw DELETE WHERE TimeFlowStart >= subtractMinutes(now(), {minutes})";
-        }
-        // period = [curTime - minutesStart, curTime - minutesEnd]
-        public string FindForTimePeriodQuery(int minutesStart, int minutesEnd)
-        {
-            return @$"WITH subtractMinutes(now(), {minutesStart}) as startTime,
-                            subtractMinutes(now(), {minutesEnd}) as endTime
-                      SELECT * FROM flows_raw where TimeFlowStart >= startTime and TimeFlowStart <= endTime;";
+            List<string> filtersString = new List<string> {filters.MinTimeFlowStart == null ? "" : @$"TimeFlowStart >= {filters.MinTimeFlowStart}",
+                                                           filters.MaxTimeFlowStart == null ? "" : @$"TimeFlowStart <= {filters.MaxTimeFlowStart}",
+                                                           filters.MinBytes == null ? "" : @$"Bytes >= {filters.MinBytes}",
+                                                           filters.MaxBytes == null ? "" : @$"Bytes <= {filters.MaxBytes}",
+                                                           filters.SrcAddr == null ? "" : @$"SrcAddr = {filters.SrcAddr}",
+                                                           filters.DstAddr == null ? "" : @$"DstAddr = {filters.DstAddr}" };
+            string filter = "";
+            foreach (var filterString in filtersString)
+            {
+                if (filterString.Length > 0)
+                {
+                    if (filter.Length > 0)
+                    {
+                        filter += "and ";
+                    }
+                    filter += filterString;
+                }
+            }
+
+            if (filter.Length > 0)
+            {
+                filter = " where " + filter;
+            }
+
+            return "SELECT * FROM flows_raw" + filter + ";";
         }
         public string FindAllQuery()
         {
-            return @$"SELECT * FROM flows_raw";
+            return @$"SELECT * FROM flows_raw;";
         }
     }
 }

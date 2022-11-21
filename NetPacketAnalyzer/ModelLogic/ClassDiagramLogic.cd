@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="ModelLogic.Controllers.AdminController">
+    <Position X="7.75" Y="3.25" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgCAQBAAiAAAAACAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\AdminController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelLogic.Controllers.AnalystController">
+    <Position X="12.25" Y="3.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAQAAAAAAAAgAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\AnalystController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelLogic.Controllers.GuestController">
+    <Position X="10" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Controllers\GuestController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelLogic.Controllers.UserController">
+    <Position X="10" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AgAMAAAAAAAAAAgAAAAAAAAIIAEQCAAAACgAEAABAAA=</HashCode>
+      <FileName>Controllers\UserController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelLogic.Models.DataSource">
+    <Position X="17" Y="3" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAACAAAIAA=</HashCode>
+      <FileName>Models\DataSource.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelLogic.Models.Destination">
+    <Position X="19.5" Y="3" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAIAA=</HashCode>
+      <FileName>Models\Destination.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelLogic.Models.DestinationType">
+    <Position X="21.25" Y="3" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAAAAAAAAA=</HashCode>
+      <FileName>Models\DestinationType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelLogic.Models.Flow">
+    <Position X="15" Y="3" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAAABAAACEAgAAAAABAAAAQAAAEAAAAAAoAJAIAAI=</HashCode>
+      <FileName>Models\Flow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelLogic.Models.LoginInfo">
+    <Position X="19.5" Y="4.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\LoginInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelLogic.Models.SourceType">
+    <Position X="21.25" Y="4.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAASAAAAAAAAA=</HashCode>
+      <FileName>Models\SourceType.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ModelLogic.Models.UserInfo">
+    <Position X="17" Y="5.25" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAQACAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\UserInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
